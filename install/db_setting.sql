@@ -3,6 +3,8 @@
 
 --데이터베이스 설정입니다.
 
+CREATE DATABASE hci;
+
 CREATE TABLE user(
     id varchar(50) not null,
     pw varchar(50) not null,

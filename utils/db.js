@@ -57,7 +57,7 @@ Table.prototype.select = function (where, callback) {
 
 
 
-        console.log(sql);
+        
         conn.query(sql, function (err, results) {
             if (err)
                 callback(err, null)
@@ -84,7 +84,7 @@ function DB() {
     add table
 */
 DB.prototype.makeTable = function (key, tablename, fields) {
-    console.log(tablename);
+    
     this.tables.push([key, new Table(tablename, this.pool, fields)]);
 }
 DB.prototype.getTable = function (key) {
