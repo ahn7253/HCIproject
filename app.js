@@ -8,9 +8,13 @@ var homeRouter = require('./routes/home');
 var boardRouter = require('./routes/board');
 var clubRouter = require('./routes/club');
 var machingRouter = require('./routes/maching');
+var test = require('./test');
 //var usersRouter = require('./routes/users');
 
 var app = express();
+//global.DB = require('./utils/db').getInstace(); 만약 DB가 있다면 주석처리 제거해도 됩니다. 
+
+//DB.makeTable("User","user",["id","pw","name","school_name","email"]) 만약 DB가 있다면 주석처리 제거해도 됩니다.
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,7 +30,7 @@ app.use('/', homeRouter);
 app.use('/board', boardRouter);
 app.use('/club', clubRouter);
 app.use('/maching', machingRouter);
-
+app.use('/test',test); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
