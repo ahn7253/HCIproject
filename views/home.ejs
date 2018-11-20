@@ -43,19 +43,20 @@
             <button class="login_button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
         </div>
         <div id="id01" class="modal">
-            <form class="modal-content animate" action="/action_page.php">
+            <form class="modal-content animate" action="/user/loginaction" method="POST">
                 <div class="imgcontainer">
                     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                 </div>
                 <div class="container">
-                    <label for="uname">
-                        <b>Username</b>
+                    <label for="id">
+                        <b>ID</b>
                     </label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
-                    <label for="psw">
+                    <input type="text" placeholder="Enter ID" name="id" required>
+                    <label for="pw">
                         <b>Password</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <input type="password" placeholder="Enter Password" name="pw" required>
+                    <input type="text" name="url" style="display:none;" value="/">
                     <button type="submit">Login</button>
                     <label>
                         <input type="checkbox" checked="checked" name="remember"> Remember me

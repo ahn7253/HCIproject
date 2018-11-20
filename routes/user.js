@@ -16,6 +16,7 @@ router.post('/loginaction', function(req, res, next) {
         "id":req.body.id,
         "pw":req.body.pw
     }
+    
     var fromURL = req.body.url;
     var User = DB.getTable("User");
 
@@ -24,7 +25,8 @@ router.post('/loginaction', function(req, res, next) {
             res.send("<script>alert('DBERROR!');history.back();</script>");
             return;
         }
-        if(results.len==1){
+        
+        if(results.length==1){
             req.session.user = results[0];
             res.send("<script>location.href='"+fromURL+"';</script>");
         }else{
