@@ -11,5 +11,8 @@ CREATE TABLE user(
     name varchar(20) not null,
     school_name varchar(50) not null,
     email varchar(100) not null,
+    author int(2) not null,
     PRIMARY KEY(id)
 );
+
+INSERT INTO user values('admin','1234','CCManager','아주대학교','CC@clubcollector.com',1); -- 관리자 계정.
