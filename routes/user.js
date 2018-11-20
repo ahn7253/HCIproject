@@ -38,6 +38,7 @@ router.post('/loginaction', function(req, res, next) {
 
   
 });
+
 /**
  *  GET /user/getsession
  * 
@@ -60,6 +61,18 @@ router.get('/getsession',function(req,res){
         res.send(session);
     }else
     res.send("none");
+});
+
+/**
+ *  GET /user/logoutaction
+ * 
+ *  로그아웃을 시켜줍니다.
+ * 
+ *  세션정보를 삭제합니다.
+ */
+router.get('/logoutaction',function(req,res){
+    req.session.destroy();
+    res.redirect('/');
 });
 
 module.exports = router;
