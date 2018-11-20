@@ -13,7 +13,9 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
-    "semantic-ui": "^2.4.2",
     "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "semantic-ui": "^2.4.2"
   }
 }
