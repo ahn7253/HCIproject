@@ -1,7 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/**
+ *  post /user/loginaction
+ * 
+ *  params : 
+ *      id, pw, url(어디페이지에서 왔는지 확인하기 위해서)
+ * 
+ *  성공시 : 로그인시도했던 페이지로 이동
+ *  실패시 : alert와 함께 이전페이지로 이동.
+ * 
+ */
 router.post('/loginaction', function(req, res, next) {
     var condition = {
         "id":req.body.id,
@@ -27,7 +36,18 @@ router.post('/loginaction', function(req, res, next) {
 
   
 });
-
+/**
+ *  GET /user/getsession
+ * 
+ *  세션이 있을 시 JSON파일 전송
+ *  JSON 파일 형식은
+ *  {"id":"유저아이디","name":"사용자이름"}
+ * 
+ *  세션이 없을 시 "none"이라고 전송
+ * 
+ *  로그인이 되어있는지 안되어있는지 판단할 수 있습니다.
+ * 
+ */
 router.get('/getsession',function(req,res){
     if(req.session.user){
         
