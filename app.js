@@ -6,6 +6,8 @@ var logger = require('morgan');
 var session = require('express-session');
 var expressLayouts = require('express-ejs-layouts');
 
+var sessionController = require('./utils/session');
+
 var homeRouter = require('./routes/home');
 var boardRouter = require('./routes/board');
 var clubRouter = require('./routes/club');
@@ -38,6 +40,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(sessionController());
 
 app.use('/', homeRouter);
 app.use('/board', boardRouter);
