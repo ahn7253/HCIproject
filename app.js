@@ -14,6 +14,7 @@ var clubRouter = require('./routes/club');
 var machingRouter = require('./routes/maching');
 var userRouter = require('./routes/user');
 var test = require('./test');
+var groupRouter = require('./routes/group');
 //var usersRouter = require('./routes/users');
 
 var app = express();
@@ -48,7 +49,8 @@ app.use('/board', boardRouter);
 app.use('/club', clubRouter);
 app.use('/maching', machingRouter);
 app.use('/user',userRouter);
-app.use('/test',test); 
+app.use('/test',test);
+app.use('/group',groupRouter); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
