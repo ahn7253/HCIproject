@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(sessionController());
+app.use(sessionController);
 
 app.use('/', homeRouter);
 app.use('/board', boardRouter);
