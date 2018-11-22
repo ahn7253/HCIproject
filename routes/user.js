@@ -11,56 +11,32 @@ var router = express.Router();
  *  실패시 : alert와 함께 이전페이지로 이동.
  * 
  */
-router.post('/loginaction', function(req, res, next) {
+router.post('/loginaction', function (req, res, next) {
     var condition = {
-        "id":req.body.id,
-        "pw":req.body.pw
+        "id": req.body.id,
+        "pw": req.body.pw
     }
-    
+
     var fromURL = req.body.url;
     var User = DB.getTable("User");
 
-    User.select(condition,function(err,results){
-        if(err){
+    User.select(condition, function (err, results) {
+        if (err) {
             res.send("<script>alert('DBERROR!');history.back();</script>");
             return;
         }
-        
-        if(results.length==1){
+
+        if (results.length == 1) {
             req.session.user = results[0];
-            res.send("<script>location.href='"+fromURL+"';</script>");
-        }else{
+            res.send("<script>location.href='" + fromURL + "';</script>");
+        } else {
             res.send("<script>alert('not valid!');history.back();</script>");
             return;
         }
-        
+
     });
 
-  
-});
 
-/**
- *  GET /user/getsession
- * 
- *  세션이 있을 시 JSON파일 전송
- *  JSON 파일 형식은
- *  {"id":"유저아이디","name":"사용자이름"}
- * 
- *  세션이 없을 시 "none"이라고 전송
- * 
- *  로그인이 되어있는지 안되어있는지 판단할 수 있습니다.
- * 
- */
-router.get('/getsession',function(req,res){
-    if(req.session.user){
-        
-        var session = {
-            "id":req.session.user.id,
-            "name":req.session.user.name
-        }
-        res.send(session);
-    }else
-    res.send("none");
 });
 
 /**
@@ -70,9 +46,72 @@ router.get('/getsession',function(req,res){
  * 
  *  세션정보를 삭제합니다.
  */
-router.get('/logoutaction',function(req,res){
+router.get('/logoutaction', function (req, res) {
     req.session.destroy();
+    req.mysession.destroy();
     res.redirect('/');
+});
+
+/**
+ *  post /user/registeraction
+ * 
+ *  params : 
+ *      id, pw,name,school_name,email
+ * 
+ *  유저를 등록시켜줍니다.
+ * 
+ *  성공시 : 홈으로 이동.
+ *  
+ * 
+ */
+router.post('/registeraction', function (req, res) {
+    var User = DB.getTable("User")
+
+    var values = {
+        "id": req.params.id,
+        "pw": req.params.pw,
+        "name": req.params.name,
+        "school_name": req.params.school_name,
+        "email": req.params.email,
+        "author": 0
+    }
+
+    User.getmaxid(function (uid) {
+        uid++;
+        values["uid"] = uid;
+
+        User.insert(values, function (err, results) {
+            if (err)
+                throw err;
+        });
+    })
+
+
+    res.send("<script>location.href='/';</script>");
+});
+/**
+ *  GET /user/checkdupid/"체크할 아이디"
+ * 
+ *  아이디 중복 확인
+ * 
+ *  같은 아이디가 존재할 시 : "reject" 라고 반환
+ *  같은 아이디가 없을 시 : "accept" 라고 반환
+ * 
+ */
+router.get('/checkdupid/:id',function(req,res){
+    var id = req.params.id;
+    var User = DB.getTable("User");
+    var condition={
+        "id":id
+    }
+    User.select(condition,function(err,results){
+        if(err)
+            throw err;
+        if(results.length==0)
+            res.send("accept");
+        else
+            res.send("reject");
+    });
 });
 
 module.exports = router;
