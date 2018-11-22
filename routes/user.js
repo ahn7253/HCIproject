@@ -68,17 +68,19 @@ router.post('/registeraction', function (req, res) {
     var User = DB.getTable("User")
 
     var values = {
-        "id": req.params.id,
-        "pw": req.params.pw,
-        "name": req.params.name,
-        "school_name": req.params.school_name,
-        "email": req.params.email,
+        "id": req.body.id,
+        "pw": req.body.pw,
+        "name": req.body.name,
+        "school_name": req.body.school_name,
+        "email": req.body.email,
         "author": 0
     }
+    
 
     User.getmaxid(function (uid) {
         uid++;
         values["uid"] = uid;
+        
 
         User.insert(values, function (err, results) {
             if (err)
