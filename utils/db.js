@@ -3,10 +3,12 @@ var db = null
 var ms = require('mysql');
 var config = require('../config').dbconfig;
 
-function Table(tablename, pool, fields) {
+
+
+function Table(tablename, pool, fid) {
     this.tablename = tablename;
     this.pool = pool;
-    this.fields = fields;
+    this.fid = fid;
 }
 
 /*
@@ -37,6 +39,18 @@ Table.prototype.insert = function (values, callback) {
         });
     })
 }
+Table.prototype.getmaxid = function (callback) {
+    var id = this.fid
+    var sql = "SELECT MAX(" + id + ") FROM " + this.tablename;
+    this.pool.getConnection(function (err,conn) {
+        conn.query(sql, function (err, results) {
+            if(err)
+                throw err;
+            callback(results[0]["MAX("+id+")"]);   
+        })
+        conn.release();
+    });
+}
 /**
  *  function:
  *      select
@@ -57,7 +71,7 @@ Table.prototype.select = function (where, callback) {
 
 
 
-        
+
         conn.query(sql, function (err, results) {
             if (err)
                 callback(err, null)
@@ -83,9 +97,9 @@ function DB() {
 
     add table
 */
-DB.prototype.makeTable = function (key, tablename, fields) {
-    
-    this.tables.push([key, new Table(tablename, this.pool, fields)]);
+DB.prototype.makeTable = function (key, tablename, fid) {
+
+    this.tables.push([key, new Table(tablename, this.pool, fid)]);
 }
 DB.prototype.getTable = function (key) {
     for (var i in this.tables) {
