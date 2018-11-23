@@ -6,11 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title id="mainTitle"><%=title%></title>
     <link rel='stylesheet' href='/stylesheets/modal.css' />
+
     <link rel="stylesheet" type="text/css" href="/SemanticFolder/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/SemanticFolder/dist/semantic.min.css">
+
     <script
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
+
     <script src="/SemanticFolder/dist/semantic.min.js"></script>
     <script>
             // Get the modal
@@ -53,12 +57,16 @@
             <h2 class="ui grey inverted header">Club Collector</h2>
         </div>
         <div class="right menu">
-            <a class="item">
-                <i class="large comment alternate icon"></i>
-            </a>
-            <a class="item">
-                 <i class="large sign-in icon" onclick="document.getElementById('id01').style.display='block'"></i> 
-            </a>
+            <% if(session==="none"){ %>
+                <a class="item">
+                    <i class="large sign-in icon" onclick="document.getElementById('id01').style.display='block'"></i> 
+                </a>
+            <% } else { %>
+                <a class="item">
+                        <i class="large power off icon"></i> 
+                </a>
+            <% } %> 
+           
             <!--모달 시작-->
             <div id="id01" class="modal">
                     <form class="modal-content animate" action="/user/loginaction" method="POST">
@@ -92,8 +100,6 @@
             <a class="item">
                 <i class="large bars icon"></i>
             </a>
-        
-            <a class="item">Link</a> 
         </div>
     </div>
     <div class="ui container">
@@ -125,6 +131,6 @@
         <h4 style="text-align: center;">Club collecter.Corp site designed by CC | HCI | ajou.univ </h4>
         <br>
     </footer>
-        <%- script %>
+        
 </body>
 </html>

@@ -32,7 +32,7 @@ var mysession = session({ // setting session
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set("mysession",mysession);
-app.set("layout extractScripts", true);
+app.set("layout extractScripts", false);
 app.set('layout','layouts/layout');
 app.use(expressLayouts);
 app.use(mysession); // use session.
