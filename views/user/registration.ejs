@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    회원가입
+  </title>
+  <link rel='stylesheet' href='/stylesheets/modal.css' />
+  <link rel="stylesheet" type="text/css" href="/SemanticFolder/dist/semantic.min.css" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="/SemanticFolder/dist/semantic.min.js"></script>
+  <style>
+    .column {
+      max-width: 450px;
+    }
+
+    .grid {
+      height: 100%;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui teal image header">
+        <div class="content">
+          CC
+        </div>
+      </h2>
+      <form class="ui large form" name="fr" onsubmit="return formcheck();" action="/user/registeraction" method="post">
+        <div class="ui stacked segment">
+          <div class="field">
+            <span class="ui left icon input" style="width:85%">
+              <i class="user icon"></i>
+              <input type="text" name="id" placeholder="ID" onkeydown="changecheck();">
+            </span>
+            <span class="right" style="width:20%">
+              <button type="button" onclick="iddupcheck();" class="ui icon button">
+                <i class="check circle icon"></i>
+              </button>
+            </span>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="pw" placeholder="Password">
+            </div>
+
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user circle icon"></i>
+              <input type="text" name="name" placeholder="Name">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="university icon"></i>
+              <input type="text" name="school_name" placeholder="School name">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="envelope icon"></i>
+              <input type="email" name="email" placeholder="E-mail">
+            </div>
+          </div>
+          <button type="submit" class="ui teal button">Register</button>
+        </div>
+
+      </form>
+
+
+    </div>
+  </div>
+  <footer>
+    <img src=/img/footerimg.png style="height: 50%;width: 100%; margin-top: 7%"></img>
+    <h4 style="text-align: center;">Club collecter.Corp site designed by CC | HCI | ajou.univ </h4>
+    <br>
+  </footer>
+
+  <div id="id01" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>웹페이지 알림</h2>
+      </header>
+      <div id="fc-body" class="w3-container">
+
+      </div>
+
+    </div>
+  </div>
+  <div id="id02" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>아이디 중복 체크</h2>
+      </header>
+      <div id="check-body" class="w3-container">
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script>
+
+    var checkID = false;
+    function formcheck() {
+
+      var checkform = true;
+      var fcbody = document.getElementById("fc-body");
+      fcbody.innerHTML = "";
+      if (fr.id.value == "") {
+        fcbody.innerHTML = fcbody.innerHTML + "아이디를 채워주세요<br>";
+        checkform = false;
+
+      }
+      if (checkID == false) {
+        fcbody.innerHTML = fcbody.innerHTML + "아이디 중복을 확인해주세요<br>";
+        checkform = false;
+      }
+      if (fr.pw.value == "") {
+        fcbody.innerHTML = fcbody.innerHTML + "비밀번호를 채워주세요<br>";
+        checkform = false;
+      }
+      if (fr.school_name.value == "") {
+        fcbody.innerHTML = fcbody.innerHTML + "학교이름을 채워주세요<br>";
+        checkform = false;
+      }
+      if (fr.name.value == "") {
+        fcbody.innerHTML = fcbody.innerHTML + "이름을 채워주세요<br>";
+        checkform = false;
+      }
+      if (fr.email.value == "") {
+        fcbody.innerHTML = fcbody.innerHTML + "이메일을 채워주세요<br>";
+        checkform = false;
+      }
+      if (checkform)
+        return true;
+      else {
+        document.getElementById('id01').style.display = 'block';
+        return false;
+      }
+
+    }
+    function iddupcheck() {
+      var xhttp = new XMLHttpRequest();
+      
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          if (this.status == 200) {
+            var result = this.responseText
+            
+            if(result=="accept"){
+              checkID=true;
+              document.getElementById('check-body').innerHTML = "중복되는 아이디가 없습니다.";
+            }
+            else{
+              checkID=false;
+              document.getElementById('check-body').innerHTML = "중복되는 아이디가 존재합니다.<br>다른아이디를 써주시기바랍니다.";
+            }
+              
+            
+            document.getElementById('id02').style.display = 'block';
+          }else if(this.status==404){
+            document.getElementById('check-body').innerHTML = "아이디를 채워넣어주세요";
+            document.getElementById('id02').style.display = 'block';
+          }
+        }
+      }
+      xhttp.open("GET", '/user/checkdupid/'+ fr.id.value, true);
+      xhttp.send();
+
+    }
+    function changecheck() {
+      checkID = false;
+    }
+  </script>
+</body>
+
+</html>

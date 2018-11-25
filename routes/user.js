@@ -116,4 +116,8 @@ router.get('/checkdupid/:id',function(req,res){
     });
 });
 
+router.get('/registration',function(req,res){
+    res.render('user/registration');
+});
+
 module.exports = router;
