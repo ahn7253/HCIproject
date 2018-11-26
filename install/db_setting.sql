@@ -29,6 +29,7 @@ CREATE TABLE club(
     2nd_area varchar(100) not null,
     category varchar(100) not null,
     match_percent int(100) not null,
+    description varchar(400),
     PRIMARY KEY(cid)
 );
 
