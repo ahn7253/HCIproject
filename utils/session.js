@@ -1,13 +1,11 @@
 
 var session = function(req,res,next){
   var sending;
-  var test;
   if(req.session.user){
     sending = {
       "id":req.session.user.id,
-      "name":req.session.user.name
+      "name":req.session.user.namez
     };
-    
     sending = JSON.stringify(sending);
   }else{
     sending="none"
