@@ -18,6 +18,17 @@
                     <br><a href="/notyet">AMONT</a>
                     <br><a href="/notyet">AJESS</a>
                     <br><a href="/notyet">아르페</a>
+                    <!--동아리 등록-->
+                    <div>
+                    <br>
+                    <% if(session==="none"){ %>
+                       로그인해주세요
+                    <% } else { %>
+                        <button class="circular ui icon button" style="background-color:lightblue; display:block; margin:auto;" onclick="location.href='/club/registration';">등록하기
+                            <i class="icon plus"></i>
+                        </button>
+                    <% } %>
+                    </div> 
                 </div>
               </div>
               <div class="column">
@@ -35,10 +46,4 @@
     </div>
     </div>
 
-    <!--동아리 등록-->
-    <% if(session==="none"){ %>
-        <button href="/club/registration">등록하기</button>
-    <% } else { %>
-        <button>로그인시</button>
-    <% } %> 
 </body>
