@@ -1,7 +1,7 @@
 <body>
 
     <!--board content-->
-        
+    
     <img src=/img/clubmain.png style="width:100%; align-items: center;margin-bottom: 4%"></img>
     <div class="ui segment" style="width: 90%; margin: auto">
         <h2 class="ui header">
@@ -33,6 +33,12 @@
             </div>
           </div>
     </div>
-   
     </div>
+
+    <!--동아리 등록-->
+    <% if(session==="none"){ %>
+        <button href="/club/registration">등록하기</button>
+    <% } else { %>
+        <button>로그인시</button>
+    <% } %> 
 </body>
