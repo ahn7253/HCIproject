@@ -48,7 +48,7 @@ router.post('/loginaction', function (req, res, next) {
  */
 router.get('/logoutaction', function (req, res) {
     req.session.destroy();
-    req.mysession.destroy();
+    delete req.mysession;
     res.redirect('/');
 });
 
