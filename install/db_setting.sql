@@ -21,17 +21,19 @@ INSERT INTO user values(1,'admin','1234','CCManager','아주대학교','CC@clubc
 
 
 CREATE TABLE club(
-    cname varchar(50) not null,
     cid int(10) not null,
+    cname varchar(50) not null,
     url varchar(100) not null,
     school_name varchar(50) not null,
     1st_area varchar(100) not null,
     2nd_area varchar(100) not null,
     category varchar(100) not null,
-    match_percent int(100) not null,
+    match_percent int(100),
     description varchar(400),
     PRIMARY KEY(cid)
 );
+
+INSERT INTO club(cid,cname,url,school_name,1st_area,2nd_area,category) values(1,'동아리','CC','아주대학교','경기도','수원시 영통구','없음')
 
 CREATE TABLE club_user(
     cid int(10) not null,
