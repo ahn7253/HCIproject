@@ -11,10 +11,10 @@ var Seoul='강남구, 강동구, 강북구, 강서구, 관악구, '
 var Seoul_array = Seoul.split(", ");
 var incheon = '계양구, 미추홀구, 남동구, 동구, 부평구, 서구, 연수구, 중구';
 var incheon_array = incheon.split(", ");
-var gyeogi =  '수원시 권선구, 수원시 영통구, 수원시 장안구, 수원시 팔달구, 성남시 분당구, 성남시 수정구, 성남시 중원구' 
+var gyeogi =  '수원시 권선구, 수원시 영통구, 수원시 장안구, 수원시 팔달구, 성남시 분당구, 성남시 수정구, 성남시 중원구, ' 
 +'안양시 동안구, 안양시 만안구, 고양시 덕양구, 고양시 일산동구, 고양시 일산서구, 안산시 단원구, 안산시 상록구, 용인시 기흥구, 용인시 수지구, '
 +'용인시 처인구';
-var gyogi_array=gyeogi.split(', ');
+var gyeogi_array=gyeogi.split(', ');
 
 
 function changeFunc() {
