@@ -48,7 +48,7 @@ app.use('/club', clubRouter);
 app.use('/maching', machingRouter);
 app.use('/user',userRouter);
 app.use('/test',test);
-app.use('/group',groupRouter); 
+app.use('/group',groupRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
