@@ -33,7 +33,7 @@ CREATE TABLE club(
     PRIMARY KEY(cid)
 );
 
-INSERT INTO club(cid,cname,url,school_name,1st_area,2nd_area,category) values(1,'동아리','CC','아주대학교','경기도','수원시 영통구','없음')
+INSERT INTO club(cid,cname,url,school_name,1st_area,2nd_area,category) values(1,'z','CC','z','z','z z','z')
 
 CREATE TABLE club_user(
     cid int(10) not null,
