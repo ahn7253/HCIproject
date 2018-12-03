@@ -102,7 +102,6 @@
         </div>
     </div>
     <div class="ui container">
-        
 
         <a href="/" class="red item" id='home'>홈</a>
         <a href="/club" class="orange item" id='club'>동아리</a>
@@ -111,7 +110,6 @@
         <a href="/maching" class="green item" id='maching'>매칭하기</a> 
         <% if (title) { %>
             <script>
-                
                 //menu id 값 받음
                 var selectedMenu=document.getElementById("mainTitle").textContent;
                 var menuActived=document.getElementById(selectedMenu);
@@ -120,7 +118,7 @@
         <% } %>
     </div>
 </div>
-`    
+`
 </header>
     <div id="main" style="border: 1px solid #dedede;">
         <%- body %>
