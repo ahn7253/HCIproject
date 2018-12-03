@@ -38,8 +38,10 @@ router.post('/writeaction', function (req, res) {
 });
 
 router.get('/write', function (req, res) {
-  res.render('board/write', { title: 'write board', session: req.mysession, layout: 'layouts/layout2' });
-
+  if (req.session.user)
+    res.render('board/write', { title: 'write board', session: req.mysession, layout: 'layouts/layout2' });
+  else
+    res.send("<script>alert('you must login');history.back();</script>");
 });
 
 router.get('/boardlist', function (req, res) {
