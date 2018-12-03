@@ -1,0 +1,53 @@
+<body>
+  <script>
+    function init() {
+      var link = document.createElement("link");
+      link.type = "text/css";
+      link.rel = "stylesheet";
+      link.href = "https://www.w3schools.com/w3css/4/w3.css";
+      var style = document.createElement("style");
+      var text = document.createTextNode(".column {max-width: 550px;} .grid { height: 100%;}");
+      style.appendChild(text);
+      document.getElementsByTagName("head")[0].appendChild(style);
+      document.getElementsByTagName("head")[0].appendChild(link);
+
+    }
+    init();
+
+  </script>
+
+  <div class="ui segment" style="width:90%;margin:auto;">
+    
+    <form class="ui form"method="post" action="/board/writeaction">
+      <table class="ui black table">
+        <thead>
+          <tr>
+            <td colspan="2" style="text-align:center;"><h2 class="ui header">게시판 쓰기</h2></td>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" class="" placeholder="게시판 제목" name="title" maxlength="50">
+            </td>
+          </tr>
+          <tr>
+
+            <td>
+              <textarea class="" placeholder="게시판 내용" name="content" maxlength="2048" style="height:350px;"></textarea>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="">
+        <button type="submit" class="ui button">글쓰기</button>
+      </div>
+
+
+    </form>
+  </div>
+</body>
