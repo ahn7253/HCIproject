@@ -42,6 +42,38 @@ router.get('/write', function (req, res) {
 
 });
 
+router.get('/boardlist', function (req, res) {
+  var page = 1;
+  var Bbs = DB.getTable('Bbs');
+  var data = null;
+  if (req.params.p)
+    page = req.params.p;
+
+
+  var query = "SELECT b.bid,u.id,b.date,b.title FROM bbs AS b,user as u WHERE b.uid=u.uid ORDER BY bid desc LIMIT 10 OFFSET " + (page - 1) * 10;
+  Bbs.special(query, function (err, results) {
+    if (err)
+      throw err;
+    res.render('board/boardlist', { data: results, title: 'board list', session: req.mysession, layout: 'layouts/layout2' })
+  });
+
+  /*
+    var data = [];
+    data.push({
+      "bid": 1,
+      "title": "hello",
+      "id": "id",
+      "date": "2013-20-065"
+    });
+    data.push({
+      "bid": 2,
+      "title": "hello",
+      "id": "id",
+      "date": "2013-20-065"
+    });
+    res.render('board/boardlist', { data: data, title: 'board list', session: req.mysession, layout: 'layouts/layout2' })
+  */
+});
 
 
 module.exports = router;

@@ -42,11 +42,11 @@ Table.prototype.insert = function (values, callback) {
 Table.prototype.getmaxid = function (callback) {
     var id = this.fid
     var sql = "SELECT MAX(" + id + ") FROM " + this.tablename;
-    this.pool.getConnection(function (err,conn) {
+    this.pool.getConnection(function (err, conn) {
         conn.query(sql, function (err, results) {
-            if(err)
+            if (err)
                 throw err;
-            callback(results[0]["MAX("+id+")"]);   
+            callback(results[0]["MAX(" + id + ")"]);
         })
         conn.release();
     });
@@ -73,6 +73,20 @@ Table.prototype.select = function (where, callback) {
 
 
         conn.query(sql, function (err, results) {
+            if (err)
+                callback(err, null)
+            else
+                callback(null, results)
+
+            conn.release()
+        })
+    });
+}
+
+Table.prototype.special = function (query, callback) {
+    this.pool.getConnection(function (err, conn) {
+
+        conn.query(query, function (err, results) {
             if (err)
                 callback(err, null)
             else
