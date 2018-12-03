@@ -1,0 +1,58 @@
+<body>
+  <div class="ui segment" style="width:90%;margin:auto;">
+    <table class="ui black table">
+
+      <tbody>
+        <tr>
+
+          <td class="">
+            글 제목
+          </td>
+          <td class="" id="title">
+            안녕
+          </td>
+          <td class="">
+            작성자
+          </td>
+          <td class="" id="id">
+            나야
+          </td>
+
+
+        </tr>
+
+        <tr>
+
+          <td class="">
+            작성일자
+          </td>
+          <td class="" id="date">
+            몰라
+          </td>
+        </tr>
+        <tr style="height:350px;">
+          <td colspan="4" id="content">
+            내용이야
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function update(results){
+      var title = document.getElementById("title");
+      var nickname = document.getElementById("id");
+      var content = document.getElementById("content");
+      var date = document.getElementById("date");
+
+      title.innerHTML = results["title"];
+      nickname.innerHTML = results["id"];
+      content.innerHTML = results['content'];
+      date.innerHTML = results['date'];
+    }
+  </script>
+  <script>
+     var value = <%- JSON.stringify(data) %>;
+    update(value);
+  </script>
+</body>
