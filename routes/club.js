@@ -14,7 +14,7 @@ router.get('/registration', function (req, res) {
 });
 
 router.post('/registeraction', function (req, res) {
-  var data = {
+  var dataClub = {
     "cname": req.body.cname,
     "url": req.body.url,
     "school_name": req.body.school_name, 
@@ -24,16 +24,30 @@ router.post('/registeraction', function (req, res) {
     "category": req.body.category
   }
   var Club = DB.getTable('Club');
-
+  var User = DB.getTable('User');
+  var Club_User = DB.getTable('Club_User');
+  var data_club_user= {
+    "author":2,
+    "uid":req.session.user.uid
+  }
   Club.getmaxid(function(cid){
     cid++;
-    data["cid"] = cid;
+    dataClub["cid"] = cid;
+    data_club_user["cid"] = cid;
 
-    Club.insert(data,function(err,results){
+    //make club column.
+    Club.insert(dataClub,function(err,results){
       if(err)
         throw err;
-      res.redirect('/club/page/'+data.url);
-    })
+      
+      //insert master into club_user table.
+      Club_User.insert(data_club_user,function(err,results){ 
+        if(err)
+          throw err;
+        res.redirect('/club/page/'+dataClub.url);
+      });
+    });
+
   });
 });
 /**
