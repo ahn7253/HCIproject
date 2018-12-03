@@ -19,7 +19,7 @@
     <script>
             // Get the modal
             var modal = document.getElementById('id01');
-    
+
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
                 if (event.target == modal) {
@@ -49,7 +49,7 @@
 <body>
 <header style="margin-bottom: 7%">
     <!--헤더영역-->
-       
+
 <div class="ui top fixed inverted menu" style="display:block">
     <div class="ui container">
         <div class="large header item">
@@ -64,15 +64,15 @@
                 <a class="item">
                         <i class="large power off icon"></i> 
                 </a>
-            <% } %> 
-           
+            <% } %>
+
             <!--모달 시작-->
             <div id="id01" class="modal">
                     <form class="modal-content animate" action="/user/loginaction" method="POST">
                         <div class="imgcontainer">
                             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                         </div>
-                        <div class="container2">
+                        <div class="container">
                             <label for="id">
                                 <b>ID</b>
                             </label>
@@ -128,6 +128,5 @@
         <h4 style="text-align: center;">Club collecter.Corp site designed by CC | HCI | ajou.univ </h4>
         <br>
     </footer>
-        
 </body>
 </html>
