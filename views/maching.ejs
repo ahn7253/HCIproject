@@ -33,10 +33,30 @@
     </div>
 
     <!--메칭 등록-->
-    <button class="ui google plus button" style="display: block; margin:auto; margin-top:2%">
+    <button class="ui google plus button" style="display: block; margin:auto; margin-top:2%" onclick="modalOn();"
         <i class="edit outline icon"></i>
         등록하기
     </button>
+    <div class="ui longer modal" style="margin-left:30%; width:50%;">
+        <form class="ui form">
+            <h4 class="ui dividing header">매칭 등록하기</h4>
+            <div class="field">
+                <label>매칭 제목</label>
+                <div class="field">
+                  <input type="text" name="matching_Title" placeholder="매칭 제목">
+                </div>
+                <label>매칭 내용</label>
+                <div class="field">
+                    <textarea></textarea>
+                </div>
+            </div>
+        </form>
+        <div class="actions">
+          <div class="ui approve button">Approve</div>
+          <div class="ui button">Neutral</div>
+          <div class="ui cancel button">Cancel</div>
+        </div>
+      </div>
     <br>
 
     <!--메칭 필터-->
@@ -141,6 +161,11 @@
 <script>   
 
 $('.ui.dropdown').dropdown('set selected', 0);
+function modalOn(){
+    $('.ui.longer.modal')
+  .modal('show')
+;
+};
 
 
 
