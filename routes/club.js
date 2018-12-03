@@ -13,6 +13,15 @@ router.get('/registration', function (req, res) {
     res.send("<script>alert('you arent in login.');history.back();</script>")
 });
 
+//page 부분 추가된 것
+router.get('/page/pictureboard', function (req, res, next) {
+  res.render('club/page/pictureBoard', { title: 'club', session: req.mysession, layout: 'layouts/layout2' });
+});
+
+router.get('/page/main', function (req, res, next) {
+  res.render('club/page/main', { title: 'main', session: req.mysession, layout: 'layouts/layout2' });
+});
+
 router.post('/registeraction', function (req, res) {
   var dataClub = {
     "cname": req.body.cname,
