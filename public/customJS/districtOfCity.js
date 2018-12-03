@@ -17,27 +17,27 @@ var gyeogi =  '수원시 권선구, 수원시 영통구, 수원시 장안구, �
 var gyeogi_array=gyeogi.split(', ');
 
 
-function changeFunc() {
-    var selectBox = document.getElementById("doSi");
+function changeFunc(idOfgu) {
+    var selectBox = document.getElementById("doSi"+idOfgu);
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    var gg =document.getElementById('gu');
+    var gg =document.getElementById(idOfgu);
     
     
-    while (gu.hasChildNodes()){
-        gu.removeChild(gu.firstChild);
+    while (gg.hasChildNodes()){
+        gg.removeChild(gg.firstChild);
     }  
 
     var op1 = document.createElement("option");
     op1.value="구";
-    gu.appendChild(op1);
-    gu.removeChild(gu.firstChild);
+    gg.appendChild(op1);
+    gg.removeChild(gg.firstChild);
     
         if(selectedValue=="서울특별시"){
             for(var i =0; i< Seoul_array.length;i++){
                 var op = document.createElement("option");
                 op.text=Seoul_array[i];
                 op.value=Seoul_array[i];
-                gu.appendChild(op);
+                gg.appendChild(op);
             }
             
         }
@@ -46,7 +46,7 @@ function changeFunc() {
                 var op = document.createElement("option");
                 op.text=incheon_array[i];
                 op.value=incheon_array[i];
-                gu.appendChild(op);
+                gg.appendChild(op);
             }
         }
         if(selectedValue=="경기도"){
@@ -54,7 +54,7 @@ function changeFunc() {
                 var op = document.createElement("option");
                 op.text=gyeogi_array[i];
                 op.value=gyeogi_array[i];
-                gu.appendChild(op);
+                gg.appendChild(op);
             }
         }
    }

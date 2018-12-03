@@ -17,14 +17,15 @@
     </script>
 
     <h1 style="text-align: center">Matching</h1>
+
     
     <!--메칭 검색-->
     <div class="row">
         <div class="column">
             <div class="ui search" style="display:block;margin:auto;margin-top:1.5%">
                 <div class="ui icon input" style="margin-left:25%; width:50%;margin-bottom:2%">
-                    <input class="prompt" type="text" placeholder="Common passwords...">
-                    <i class="search icon"></i>
+                    <input class="prompt" type="text" placeholder="Common passwords..." onkeypress="return runScript(event)">     
+                        <i class="circular search link icon"></i> 
                     <div class="results"></div>
                 </div>
             </div>
@@ -32,33 +33,7 @@
     </div>
     </div>
 
-    <!--메칭 등록-->
-    <button class="ui google plus button" style="display: block; margin:auto; margin-top:2%" onclick="modalOn();"
-        <i class="edit outline icon"></i>
-        등록하기
-    </button>
-    <div class="ui longer modal" style="margin-left:30%; width:50%;">
-        <form class="ui form">
-            <h4 class="ui dividing header">매칭 등록하기</h4>
-            <div class="field">
-                <label>매칭 제목</label>
-                <div class="field">
-                  <input type="text" name="matching_Title" placeholder="매칭 제목">
-                </div>
-                <label>매칭 내용</label>
-                <div class="field">
-                    <textarea></textarea>
-                </div>
-            </div>
-        </form>
-        <div class="actions">
-          <div class="ui approve button">Approve</div>
-          <div class="ui button">Neutral</div>
-          <div class="ui cancel button">Cancel</div>
-        </div>
-      </div>
-    <br>
-
+    
     <!--메칭 필터-->
     <div class="ui segment" style="width: 90%; margin: auto">
         <h2 class="ui header">
@@ -68,7 +43,7 @@
             <div class="column">
                 <div class="ui segment">
                     <h3>지역</h3>
-                    <select class="ui dropdown" id="doSi" onchange="changeFunc();">
+                    <select class="ui dropdown" id="doSigu2" onchange="changeFunc('gu2');">
                         <option value="">도/시</option>
                         <script>
                             for(i=0;i<3;i++){
@@ -76,7 +51,7 @@
                             }
                         </script>         
                     </select>
-                    <select class="ui dropdown" id="gu">
+                    <select class="ui dropdown" id="gu2">
                             <option value="" disabled selected>구</option>
                     </select>
                 </div>
@@ -158,6 +133,62 @@
     </div>
 </div>
 
+<!--메칭 등록-->
+<button class="ui google plus button" style="display: block; margin:auto; margin-top:2%" onclick="modalOn();"
+<i class="edit outline icon"></i>
+등록하기
+</button>
+<div class="ui longer modal" style="margin-left:25%; margin-top:10%; width:50%; height: 70%;">
+<form class="ui form">
+    <h3 class="ui dividing header" style="text-align: center; margin-bottom:2%">매칭 등록하기</h3>
+    <div class="field"  style="width:80%; margin:auto;" >
+        <label>매칭 제목</label>
+        <div class="field">
+          <input type="text" name="matching_Title" placeholder="매칭 제목">
+        </div>
+        <label>매칭 내용</label>
+        <div class="field">
+            <textarea></textarea>
+        </div>
+        <div class="ui segment">
+            <h3>Category</h3>
+            <select class="ui dropdown" id="category">
+                <option value="">활동분류</option>
+                <option value="스포츠">스포츠</option>
+                <option value="예술">예술</option>
+                <option value="종교">종교</option>
+                <option value="요리">요리</option>
+                <option value="학술">학술</option>
+                <option value="봉사">봉사</option>
+                <option value="취업">취업</option>
+                <option value="기타">기타</option>      
+            </select>
+        </div>
+
+        <div class="ui segment">
+            <h3>지역</h3>
+            <select class="ui dropdown" id="doSigu1" onchange="changeFunc('gu1');">
+                <option value="">도/시</option>
+                <script>
+                    for(i=0;i<3;i++){
+                        document.write("<option>"+doSi[i]+"</option>");
+                    }
+                </script>         
+            </select>
+            <select class="ui dropdown" id="gu1">
+                    <option value="" disabled selected>구</option>
+            </select>
+        </div>
+    </div>
+</form>
+<div class="actions">
+  <div class="ui approve button">등록</div>
+  <div class="ui cancel button">취소</div>
+</div>
+</div>
+<br>
+
+
 <script>   
 
 $('.ui.dropdown').dropdown('set selected', 0);
@@ -167,7 +198,17 @@ function modalOn(){
 ;
 };
 
+$(".circular.search.link.icon").click(function(){
+    alert("result will be show");
+});
 
+function runScript(e) {
+    //See notes about 'which' and 'key'
+    if (e.keyCode == 13) {
+        alert("result will be show");
+        return false;
+    }
+}
 
   
 
