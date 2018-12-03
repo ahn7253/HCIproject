@@ -1,0 +1,77 @@
+<body>
+
+  <div class="ui segment" style="width:90%;margin:auto;">
+
+    <table class="ui black table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성자</th>
+          <th scope="col">작성일시</th>
+        </tr>
+      </thead>
+      <tbody id="bblist">
+
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function updatebbs(results) {
+      var tbody = document.getElementById("bblist");
+
+
+
+
+      for (var i = 0; i < results.length; i++) {
+        var tr = document.createElement("tr");
+        var td;
+
+
+        for (var j = 0; j < 4; j++) {
+          td = document.createElement("td");
+
+          var text;
+          switch (j) {
+            case 0:
+              text = results[i]["bid"];
+              break;
+            case 1:
+              text = results[i]["title"];
+              break;
+            case 2:
+              text = results[i]["id"];
+              break;
+            case 3:
+              text = results[i]["date"];
+              break;
+          }
+          td.appendChild(document.createTextNode(text));
+
+          tr.appendChild(td);
+
+        }
+        tr.setAttribute("bid", Number(results[i]["bid"]));
+        tr.setAttribute("class", "tr");
+        tr.setAttribute("onclick", "goboard(this)");
+        tbody.appendChild(tr);
+
+      }
+    }
+
+    function goboard(tr) {
+
+      var bid = tr.getAttribute("bid");
+
+      //window.location.href = "/bbs/showbb?bid=" + bid;
+      alert("아직 미구현 ㅎ")
+    }
+
+
+  </script>
+  <script>
+    var blist = <%- JSON.stringify(data) %>;
+    updatebbs(blist);
+  </script>
+</body>
