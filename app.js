@@ -24,7 +24,7 @@ var mysession = session({ // setting session
   resave: false,
   saveUninitialized: true
 });
-//require('./utils/dbFactory').init(); //DB 생성
+///require('./utils/dbFactory').init(); //DB 생성
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
