@@ -1,9 +1,5 @@
 
-
 <body>
-
-
-
     <div class="ui sidebar inverted vertical menu">
         <a class="item">
         1
@@ -15,22 +11,20 @@
         3
         </a>
     </div>
-    <div class="pusher">
-            <h2>동아리 사진첩</h2>
+    <div class="pusher" style="margin-top:5%">
+        
+        </div>
+        <div class="ui vertical animated button" tabindex="0" onclick="on()">
+            <div class="hidden content">menu</div>
+            <div class="visible content">
+                <i class="align justify icon"></i>
+        </div>
+        
     </div>
-
-    <button onclick="on()">cc</button>
+    <h2>동아리 사진첩</h2>
+ 
 
     <script>
-        $('.your.element')
-        .sidebar('behavior name', argumentOne, argumentTwo)
-        ;
-
-        $('h2').hover(
-            $('.ui.sidebar.inverted.vertical.menu')
-            .sidebar('toggle')
-            ;    
-        )
 
         function on(){
         $('.ui.sidebar.inverted.vertical.menu')
