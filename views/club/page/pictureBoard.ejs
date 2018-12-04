@@ -1,46 +1,35 @@
-
+<style>
+ .sidemenu{
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 20%;
+    height: 100%;
+ }
+</style>
 <body>
-    <div class="ui sidebar inverted vertical menu">
-        <a class="item">
-        1
-        </a>
-        <a class="item">
-        2
-        </a>
-        <a class="item">
-        3
-        </a>
-    </div>
-    <div class="pusher" style="margin-top:5%">
-        
+   
+    
+    <div class="ui two column stackable grid">
+        <div id="leftside" class="three wide column">
+            <div class="ui segment">Content</div>
         </div>
-        <div class="ui vertical animated button" tabindex="0" onclick="on()">
-            <div class="hidden content">menu</div>
-            <div class="visible content">
-                <i class="align justify icon"></i>
+        <div id ="maincontents" class="thirteen wide column">
+            <div class="ui segment">
+                    <h2>동아리 사진첩</h2>
+            </div>
         </div>
-        
     </div>
-    <h2>동아리 사진첩</h2>
- 
+    <button onclick="on();">dd</button>
+
 
     <script>
-<<<<<<< HEAD
-=======
-        $('.your.element')
-        .sidebar('behavior name', argumentOne, argumentTwo)
-        ;
 
-        $('h2').hover(
-            $('.ui.sidebar.inverted.vertical.menu')
-            .sidebar('toggle')
-        )
->>>>>>> 8bc58806ce7b90db8e125177586b3e69bb8b218c
 
         function on(){
-        $('.ui.sidebar.inverted.vertical.menu')
-        .sidebar('toggle')
-        ;
+        document.getElementById('maincontents').className="ten wide column";
+        document.getElementById('leftside').className="six wide column";
+        
         }
     </script>
 </body>
