@@ -131,6 +131,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 
 <!--메칭 등록-->
@@ -138,7 +139,9 @@
 <i class="edit outline icon"></i>
 등록하기
 </button>
+
 <div class="ui longer modal" style="margin-left:25%; margin-top:10%; width:50%; height: 70%;">
+
 <form class="ui form">
     <h3 class="ui dividing header" style="text-align: center; margin-bottom:2%">매칭 등록하기</h3>
     <div class="field"  style="width:80%; margin:auto;" >
@@ -180,7 +183,32 @@
             </select>
         </div>
     </div>
+    
 </form>
+
+<div id="map" align="center" style="width:500px;height:400px; margin: auto"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fce366b9ca100957cf09df739d9653f"></script>
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new daum.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
+    
+    var map = new daum.maps.Map(container, options);
+    setTimeout(function() { relayout();
+    // rest of code here
+}, 1000);
+    
+function relayout() {
+    
+    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+    map.relayout();
+}
+</script>
 <div class="actions">
   <div class="ui approve button">등록</div>
   <div class="ui cancel button">취소</div>
@@ -190,6 +218,8 @@
 
 
 <script>   
+
+
 
 $('.ui.dropdown').dropdown('set selected', 0);
 function modalOn(){
