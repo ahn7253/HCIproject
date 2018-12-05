@@ -22,6 +22,15 @@ router.get('/page/main', function (req, res, next) {
   res.render('club/page/main', { title: 'main', session: req.mysession, layout: 'layouts/layout2' });
 });
 
+router.get('/page/phoneNet', function (req, res, next) {
+  res.render('club/page/phoneNet', { title: 'phoneNet', session: req.mysession, layout: 'layouts/layout2' });
+});
+
+router.get('/page/clubBoard', function (req, res, next) {
+  res.render('club/page/clubBoard', { title: 'clubBoard', session: req.mysession, layout: 'layouts/layout2' });
+});
+
+
 router.post('/registeraction', function (req, res) {
   var dataClub = {
     "cname": req.body.cname,
