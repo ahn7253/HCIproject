@@ -45,6 +45,9 @@
                         <input type="text" id="search" oninput="searchresult()">
                     <div class='contaitner'>
                     <div id="map" align="center" style="width:300px;height:200px; margin: auto"></div>
+                    <input type="text" id="loc_name">
+                    <input type="text" id="loc_x">
+                    <input type="text" id="loc_y">
                     </div>
                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fce366b9ca100957cf09df739d9653f&libraries=services"></script>
                     <script>
@@ -132,7 +135,10 @@
                             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                             infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                             infowindow.open(map, marker);
-                            alert(place.y+"and"+place.x);
+                            document.getElementById("loc_name").value=place.place_name;
+                            document.getElementById("loc_x").value=place.x;
+                            document.getElementById("loc_y").value=place.y;
+                            
                         });
                         
                     }

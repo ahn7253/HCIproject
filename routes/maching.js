@@ -7,4 +7,9 @@ router.get('/', function(req, res, next) {
   
 });
 
+router.get('/manage', function(req, res, next) {
+  res.render('matching_Manage/matchingManageMain',{title:'mymaching',session:req.mysession,layout:'layouts/layout2'});
+  
+});
+
 module.exports = router;
