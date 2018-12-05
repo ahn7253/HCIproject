@@ -13,6 +13,7 @@
     "express": "~4.16.0",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.15.6",
+    "fullcalendar": "^3.9.0",
     "http-errors": "~1.6.2",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",

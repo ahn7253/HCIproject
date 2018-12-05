@@ -1,3 +1,51 @@
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+     calendarEvent();
+    });
+    function calendarEvent(eventData){
+     $("#calender").html("");
+     var date = new Date();
+     var d = date.getDate();
+     var m = date.getMonth();
+     var y = date.getFullYear();
+     var calendar = $('#calender').fullCalendar({
+      header: {
+       left: "",
+       center: "title",
+    //    right: "month,basicWeek,basicDay"
+       right: "today prev,next"
+       },
+       editable: true,
+       titleFormat: {
+       month: "yyyy년 MMMM",
+       week: "[yyyy] MMM dd일{ [yyyy] MMM dd일}",
+       day: "yyyy년 MMM d일 dddd"
+       },
+       allDayDefault: false,
+       defaultView: "month",
+       editable: false,
+       monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+       monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+       dayNames: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+       dayNamesShort: ["일","월","화","수","목","금","토"],
+       buttonText: {
+       today : "오늘",
+       month : "월별",
+       week : "주별",
+       day : "일별",
+       },
+       events : eventData,
+       timeFormat : "HH:mm",
+     });
+    </script>
 <body>
 
 
@@ -13,43 +61,67 @@
             3
         </a>
     </div>
-    <div class="pusher">
-        <div class="ui segment" style="width: 90%; margin: auto; margin-bottom:2%;margin-top:2%">
-            <h2 class="ui header">
-                <i class="tiny th icon"></i>
-                게시글
-            </h2>
-            <div class="ui two column very relaxed grid">
-                <div class="column">
-                    <div class="ui segment">
-                        <button class="ui icon button" style="float:right">
-                            <i class="plus icon"></i>
-                        </button>
-                        <h2 class="ui right floated header">#최신 동아리 게시글</h2>
-                        <div class="ui clearing divider"></div>
-                        <p>hello HCI</p>
-                        <p>It's demo board text</p>
-                        <p>Lets go!</p>
-                        <p>123334</p>
-
-                    </div>
+    <div class="ui stackable menu" style="margin-left: 10px; margin-right: 10px">
+        <div class="item">
+            <img src="/img/clubmark.png">
+        </div>
+        <a class="item">아주대 중앙 볼링</a>
+        <div class="item">
+            <button class="ui basic gray icon button">
+                <i class="angle double right icon"></i>
+            </button>
+        </div>
+    </div>
+    <div class="ui two column stackable grid" style="margin-left: 0px; overflow: hidden;">
+        <div id="leftside" class="three wide column">
+            <div class="ui segment">
+                <div class="ui link list">
+                    <div class="item">Home</div>
+                    <a class="item">공지사항</a>
+                    <a class="active item">사진첩</a>
+                    <a class="item">게시판</a>
+                    <a class="item">동아리연락망</a>
                 </div>
-                <div class="column">
-                    <div class="ui segment">
-                        <button class="ui icon button" style="float:right">
-                            <i class="plus icon"></i>
-                        </button>
-                        <h2 class="ui right floated header">Today's club meeting</h2>
-                        <div class="ui clearing divider"></div>
-                        <p>Come on HCI</p>
-                        <p>It's demo board text</p>
-                        <p>Lets go!</p>
-                        <p>14</p>
+            </div>
+        </div>
+        <div id="maincontents" class="thirteen wide column">
+            <div class="pusher">
+                <div class="ui segment" style="width: 100%; margin: auto; margin-bottom:2%;margin-top:2%">
+                    <h2 class="ui header">
+                        <i class="tiny th icon"></i>
+                        게시글
+                    </h2>
+                    <div class="ui two column very relaxed grid">
+                        <div class="column">
+                            <div class="ui segment">
+                                <button class="ui icon button" style="float:right">
+                                    <i class="plus icon"></i>
+                                </button>
+                                <h2 class="ui right floated header">공지사항</h2>
+                                <div class="ui clearing divider"></div>
+                                <p>hello HCI</p>
+                                <p>It's demo board text</p>
+                                <p>Lets go!</p>
+                                <p>123334</p>
+
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui segment">
+                                <h2 class="ui right floated header">
+                                    <i class=" calendar alternate outline icon"></i>
+                                    Club Calendar
+                                </h2>
+                                <div class="ui clearing divider"></div>
+                                <div id='calendar'></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <button onclick="on()">cc</button>
 
