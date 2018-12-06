@@ -1,90 +1,92 @@
-
-    <style>
-    span div.ui.segment{
-        min-width: 98%; /* Set width of the dropdown */
+<style>
+    span div.ui.segment {
+        min-width: 98%;
+        /* Set width of the dropdown */
         background: #f2f2f2;
         display: none;
     }
-    div.hover:hover span div.ui.segment{
-        display:block;
+
+    div.hover:hover span div.ui.segment {
+        display: block;
         color: black;
         background: #fafafa;
-        padding-bottom:50px;
+        padding-bottom: 50px;
     }
-    </style>
-    <script src="/customJS/districtOfCity.js">
-        
-    </script>
+</style>
+<script src="/customJS/districtOfCity.js">
 
-    <h1 style="text-align: center">Matching</h1>
+</script>
 
-    
-    <!--메칭 검색-->
-    <div class="row">
+<h1 style="text-align: center">Matching</h1>
+
+
+<!--메칭 검색-->
+<div class="row">
+    <div class="column">
+        <div class="ui search" style="display:block;margin:auto;margin-top:1.5%">
+            <div class="ui icon input" style="margin-left:25%; width:50%;margin-bottom:2%">
+                <input class="prompt" type="text" placeholder="Common passwords..." onkeypress="return runScript(event)">
+                <i class="circular search link icon"></i>
+                <div class="results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!--메칭 필터-->
+<div class="ui segment" style="width: 90%; margin: auto">
+    <h2 class="ui header">
+        Filter
+    </h2>
+    <div class="ui one column stackable grid">
         <div class="column">
-            <div class="ui search" style="display:block;margin:auto;margin-top:1.5%">
-                <div class="ui icon input" style="margin-left:25%; width:50%;margin-bottom:2%">
-                    <input class="prompt" type="text" placeholder="Common passwords..." onkeypress="return runScript(event)">     
-                        <i class="circular search link icon"></i> 
-                    <div class="results"></div>
-                </div>
+            <div class="ui segment">
+                <h3>지역</h3>
+                <select class="ui dropdown" id="doSigu2" onchange="changeFunc('gu2');">
+                    <option value="">도/시</option>
+                    <script>
+                        for (i = 0; i < 3; i++) {
+                            document.write("<option>" + doSi[i] + "</option>");
+                        }
+                    </script>
+                </select>
+                <select class="ui dropdown" id="gu2">
+                    <option value="" disabled selected>구</option>
+                </select>
+            </div>
+            <div class="ui segment">
+                <h3>Category</h3>
+                <select class="ui dropdown" id="category">
+                    <option value="">활동분류</option>
+                    <option value="스포츠">스포츠</option>
+                    <option value="예술">예술</option>
+                    <option value="종교">종교</option>
+                    <option value="요리">요리</option>
+                    <option value="학술">학술</option>
+                    <option value="봉사">봉사</option>
+                    <option value="취업">취업</option>
+                    <option value="기타">기타</option>
+                </select>
             </div>
         </div>
     </div>
-    </div>
-
-    
-    <!--메칭 필터-->
-    <div class="ui segment" style="width: 90%; margin: auto">
-        <h2 class="ui header">
-            Filter
-        </h2>   
-        <div class="ui one column stackable grid">
-            <div class="column">
-                <div class="ui segment">
-                    <h3>지역</h3>
-                    <select class="ui dropdown" id="doSigu2" onchange="changeFunc('gu2');">
-                        <option value="">도/시</option>
-                        <script>
-                            for(i=0;i<3;i++){
-                                document.write("<option>"+doSi[i]+"</option>");
-                            }
-                        </script>         
-                    </select>
-                    <select class="ui dropdown" id="gu2">
-                            <option value="" disabled selected>구</option>
-                    </select>
-                </div>
-                <div class="ui segment">
-                    <h3>Category</h3>
-                    <select class="ui dropdown" id="category">
-                        <option value="">활동분류</option>
-                        <option value="스포츠">스포츠</option>
-                        <option value="예술">예술</option>
-                        <option value="종교">종교</option>
-                        <option value="요리">요리</option>
-                        <option value="학술">학술</option>
-                        <option value="봉사">봉사</option>
-                        <option value="취업">취업</option>
-                        <option value="기타">기타</option>      
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <!--메칭 검색 결과-->
-    <div class="ui segment" style="width: 90%; margin: auto;">   
-        <div class="ui one column very relaxed grid">
-            <div class="column" onMouseOut="this.style.height='100%'">
-                <!--여기에 결과를 넣으세요-->
-                <div class="ui segment">
-                    <div class="hover">
-                        <h2 style="float:left">수원 축구 매칭구합니다.</h2>
-                        <span style="float:right">5/10</span>
-                        <div class="ui clearing divider"></div>
-                        <span class= 'contentList' style="display:block;">
+</div>
+<br>
+<br>
+<!--메칭 검색 결과-->
+<div class="ui segment" style="width: 90%; margin: auto;">
+    <div class="ui one column very relaxed grid">
+        <div class="column" onMouseOut="this.style.height='100%'">
+            <!--여기에 결과를 넣으세요-->
+            <div class="ui segment" onclick="detailmodal();">
+                <div>
+                    <h2 style="float:left">수원 축구 매칭구합니다.</h2>
+                    <span style="float:right">5/10</span>
+                    <div class="ui clearing divider"></div>
+                    <p>경기도 수원시 팔달구</p>
+                    <!-- <span class= 'contentList' style="display:block;">
                             <a href="#">세부내용 요약</a>
                             <div class="ui segment" style="width: 90%; margin: auto;">
                                 <ul class="detail" style="display:block">상세내용 축구팀 모집합니다 10팀으로 구성되어~~~~어쩌구 저쩌구</ul>
@@ -98,17 +100,18 @@
                                 </div>
                                 <button class="ui teal button" style="float:right">참여하기</button>
                             </div>
-                        </span>
-                    </div>
+                        </span> -->
                 </div>
-                <!--onMouseOver="this.style.height='300px'" onMouseOut="this.style.height='100%'"-->
-                <div class="ui segment">
-                    <div class="hover">
-                        <h2>수원 농구 리그하실 분들 구합니다.</h2>
-                        <span style="float:right">5/12</span>
-                        <div class="ui clearing divider"></div>
-                        <span class= 'contentList' style="display:block;">
-                            <a href="#">세부내용 요약</a>
+            </div>
+            <!--onMouseOver="this.style.height='300px'" onMouseOut="this.style.height='100%'"-->
+            <div class="ui segment">
+                <div>
+                    <h2>콜라보 공연합시다.</h2>
+                    <span style="float:right">2/5</span>
+                    <div class="ui clearing divider"></div>
+                    <span class='contentList' style="display:block;">
+                        <p>서울시 성북구 혜화동</p>
+                        <!-- <a href="#">세부내용 요약</a>
                             <div class="ui segment" style="width: 90%; margin: auto;">
                                 <ul class="detail" style="display:block; font-size: 20px">상세내용 농구리그 팀 모집합니가 10팀으로 구성되어~~~~어쩌구 저쩌구</ul>
                                 <div class="ui labeled button" tabindex="0" style="float:right">
@@ -120,50 +123,76 @@
                                     </a>
                                 </div>
                                 <button class="ui teal button" style="float:right">참여하기</button>
-                            </div>
-                        </span>
-                    </div>
+                            </div> -->
+                    </span>
                 </div>
+            </div>
 
-                <div class="ui segment">
-                    <h2>같이 콜라보 락 공연할 동아리 합니다</h2>
+            <div class="ui segment">
+                <div>
+                    <h2>수원 농구 리그하실 분들 구합니다.</h2>
+                    <span style="float:right">5/12</span>
+                    <div class="ui clearing divider"></div>
+                    <span class='contentList' style="display:block;">
+                        <p>경기도 수원시 팔달구</p>
+                        <!-- <a href="#">세부내용 요약</a>
+                                <div class="ui segment" style="width: 90%; margin: auto;">
+                                    <ul class="detail" style="display:block; font-size: 20px">상세내용 농구리그 팀 모집합니가 10팀으로 구성되어~~~~어쩌구 저쩌구</ul>
+                                    <div class="ui labeled button" tabindex="0" style="float:right">
+                                        <div class="ui button">
+                                            <i class="heart icon"></i> Like
+                                        </div>
+                                        <a class="ui basic label">
+                                            2,048
+                                        </a>
+                                    </div>
+                                    <button class="ui teal button" style="float:right">참여하기</button>
+                                </div> -->
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-    
+</div>
+<% include ./util/modal/detailmodal %>
+
+
 </div>
 
 <!--메칭 등록-->
-<button class="ui google plus button" style="display: block; margin:auto; margin-top:2%" onclick="modalOn();"
-<i class="edit outline icon"></i>
-등록하기
+<button class="ui google plus button" style="display: block; margin:auto; margin-top:2%" onclick="modalOn();" <i class="edit outline icon">
+    </i>
+    등록하기
 </button>
 <% include ./util/modal/matchingmodal %>
 
-<br>
+    <br>
 
 
-<script>   
-    $('.ui.dropdown').dropdown('set selected', 0);
-    function modalOn(){
-        $('.ui.longer.modal')
-    .modal('show')
-    ;
-    };
+    <script>   
+        $('.ui.dropdown').dropdown('set selected', 0);
+        function modalOn() {
+            $('.ui.longer.modal')
+                .modal('show')
+                ;
+        };
 
-    $(".circular.search.link.icon").click(function(){
-        alert("result will be show");
-    });
-
-    function runScript(e) {
-        //See notes about 'which' and 'key'
-        if (e.keyCode == 13) {
+        $(".circular.search.link.icon").click(function () {
             alert("result will be show");
-            return false;
+        });
+
+        function runScript(e) {
+            //See notes about 'which' and 'key'
+            if (e.keyCode == 13) {
+                alert("result will be show");
+                return false;
+            }
         }
-    }
 
-</script>
+        function detailmodal() {
+            $('#detail')
+                .modal('show')
+                ;
+        };
 
-
+    </script>
