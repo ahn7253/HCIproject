@@ -1,19 +1,133 @@
-<div class="ui one column stackable grid">
+
+<div class="ui one column stackable grid"  style="margin:5em; margin-bottom: -5em;margin-top: -1em;">
     <div class="column">
-        <div class="ui segment">
-            <h3>내 동아리 매칭 목록</h3>
+        <div class="ui segment" style="text-align: center">
+            <h3>Hello Balling World! - "경기지역"</h3>
         </div>
+        <div class="ui divider"></div>
     </div>
 </div>
-<div class="ui one column stackable grid">
+
+<div class="ui stackable grid" style="margin:5em; margin-top: 4em"> 
+    
+    <div class="two column row">
     <div class="column">
         <div class="ui segment">
-            <h4>경기 볼링 연합 정기전</h4>
-            <p>참여 동아리수 : 5 club</p>
-            <p>참여 인원 : 35 명</p>
-            <p>장소 : 인계동 00볼링장</p>
-            <p>시간 : 2018.12.25 / 4pm</p>
-            <button class="ui button">나도 참가하기</button>
+            <h3>세부내용</h3>
+            <p># 주최 동아리: 아주대 Apin</p>
+            <p># 참여 동아리수 : 5 club</p>
+            <p># 참여 인원 : 35 명</p>
+            <p># 장소 : 인계동 00볼링장</p>
+            <p># 상세내용: 볼링을 좋아하는 경기도 학생들을 모아 볼링 대회를 개최합니다. 장소는 인계동 볼링장입니다! 함께 즐겨요 문의 사항이나 장소 변경 문의는 메칭 방장을 통해 컨택해주세요! 참가비는 만원입니다</p>
+        </div>
+    </div>      
+        <div class="column">
+            <div class="ui segment">
+                <h3>메칭 장소:카카오</h3>
+                <div id="staticMap" style="width:600px;height:350px;"></div>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fce366b9ca100957cf09df739d9653f&libraries=services"></script>
+                    <script>
+                    var map=document.getElementById("staticMap");
+                    map.style.width = map.parentElement.style.width;
+                    map.style.height = '300px';
+                    var geocoder = new daum.maps.services.Geocoder();
+                    var x = 37.56496830314491; 
+                    var y= 126.93990862062978;
+                    var coord = new daum.maps.LatLng(37.56496830314491, 126.93990862062978);//x,y값
+                    var locationName ="dd";
+                    var markers = 
+                        {
+                            position: new daum.maps.LatLng(x,y), 
+                            text: locationName // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다     
+                        }
+                    
+
+                    var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
+                        staticMapOption = { 
+                            center: new daum.maps.LatLng(x,y), // 이미지 지도의 중심좌표
+                            level: 3, // 이미지 지도의 확대 레벨
+                            marker: markers // 이미지 지도에 표시할 마커 
+                        };    
+
+                    // 이미지 지도를 생성합니다
+
+                    var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
+                    $(window).resize(function() {
+                        resizeMap();
+                        staticMap.relayout();
+                        
+                        });
+
+                    function resizeMap() {
+                        
+                        map.style.width = map.parentElement.style.width;
+                        map.style.height = '300px';
+                    };
+                    
+                    </script>
+            </div>
         </div>
     </div>
-</div>
+    <div class="ui divider"></div>
+    
+    <div class="two column row">
+        <div class="column">
+            <div class="ui segment">
+                <h2>참여 동아리</h2>
+                <div class="ui relaxed divided list">
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                        <a class="header" href="#">아주대 Apin</a>
+                        <div class="description">12명</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                        <a class="header" href="#">경기대 볼던지기</a>
+                        <div class="description">5명</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                        <a class="header" href="#">아주대 Apin</a>
+                        <div class="description">8명</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+
+        <div class="column">
+            <div class="ui segment">
+                <h3>QnA</h3>
+                <div class="ui relaxed divided list">
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                             <a class="header" href="">모임 후에 뒷풀이 하나요?</a>
+                             <div class="description">Updated 22 mins ago</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                            <a class="header" href="">개인 볼링화 지참시 할인되나요?</a>
+                            <div class="description">Updated 34 mins ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </div>
+
+
+    <div class="ui compact menu" style="position: fixed; top:120px; right: 50px;">
+            <a class="item">
+                <i class="large icon certificate"></i> Manage
+                <div class="floating ui red label">22</div>
+            </a>
+        </div>
+
