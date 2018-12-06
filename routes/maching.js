@@ -51,7 +51,7 @@ router.post('/registeraction', function (req, res) {
         })
       })
 
-
+      res.redirect('/maching');
     })
   } else
     res.send("<script>alert('Invalid access');history.back();</script>");
