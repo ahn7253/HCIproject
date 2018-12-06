@@ -93,17 +93,25 @@ CREATE TABLE matching(
     mid int(10) not null,  
     mname varchar(500) not null,
     content varchar(2000),
+    category varchar(200),
+    1st_area varchar(100) not null,
+    2nd_area varchar(100) not null,
+    number int(10) not null,
     PRIMARY KEY(mid)
 );
+
 
 CREATE TABLE matching_list(
     mid int(10) not null,
     cid int(10) not null,
+    author int(4) not null,
     partid int(10),
     PRIMARY KEY(mid,cid),
     FOREIGN KEY(mid) REFERENCES matching(mid),
     FOREIGN KEY(cid) REFERENCES club(cid)
 );
+author : 1  -leader
+        0 - people
 
 CREATE TABLE bbs(
     bid int(10) not null,
