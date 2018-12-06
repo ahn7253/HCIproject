@@ -11,6 +11,10 @@ router.get('/manage', function (req, res, next) {
   res.render('matching_Manage/matchingManageMain', { title: 'mymaching', session: req.mysession, layout: 'layouts/layout2' });
 
 });
+router.get('/mID/confirm', function (req, res, next) {
+  res.render('matching_Manage/matchingConfirm', { title: '매칭요청관리',matchingName:'볼링 경기도 정기전', session: req.mysession, layout: 'layouts/layout2' });
+
+});
 
 router.post('/registeraction', function (req, res) {
   var Club_User = DB.getTable('Club_User')

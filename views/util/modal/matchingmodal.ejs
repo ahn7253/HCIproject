@@ -1,165 +1,159 @@
+
 <div class="ui longer modal" style="margin-left:10%; margin-top:10%; width:80%; height: 70%;">
 
-    <form class="ui form" action="/maching/registeraction" method="POST">
-        <h3 class="ui dividing header" style="text-align: center; margin-bottom:2%">매칭 등록하기</h3>
-        <div class="field" style="width:80%; margin:auto;">
-            <label>매칭 제목</label>
-            <div class="field">
-                <input type="text" name="mname" placeholder="매칭 제목">
-            </div>
-            <label>매칭 내용</label>
-            <div class="field">
-                <textarea name="content"></textarea>
-            </div>
-            <label>매칭 수</label>
-            <div class="field">
-                <input type="text" name="number" placeholder="매칭수">
-            </div>
-            <div class="ui segment">
-                <h3>Category</h3>
-                <select class="ui dropdown" id="category" name="category">
-                    <option value="">활동분류</option>
-                    <option value="스포츠">스포츠</option>
-                    <option value="예술">예술</option>
-                    <option value="종교">종교</option>
-                    <option value="요리">요리</option>
-                    <option value="학술">학술</option>
-                    <option value="봉사">봉사</option>
-                    <option value="취업">취업</option>
-                    <option value="기타">기타</option>
-                </select>
-            </div>
-
-            <div class="ui segment">
-                <h3>지역</h3>
-                <select class="ui dropdown" id="doSigu1" onchange="changeFunc('gu1');" name="f_area">
-                    <option value="">도/시</option>
-                    <script>
-                        for (i = 0; i < 3; i++) {
-                            document.write("<option>" + doSi[i] + "</option>");
-                        }
-                    </script>
-                </select>
-                <select class="ui dropdown" id="gu1" name="s_area">
-                    <option value="" disabled selected>구</option>
-                </select>
-            </div>
-            <!---
-            <div class="ui segment">
-                <input type="text" id="search" oninput="searchresult()">
-                <div class='contaitner'>
+        <form class="ui form">
+            <h3 class="ui dividing header" style="text-align: center; margin-bottom:2%">매칭 등록하기</h3>
+            <div class="field"  style="width:80%; margin:auto;" >
+                <label>매칭 제목</label>
+                <div class="field">
+                  <input type="text" name="matching_Title" placeholder="매칭 제목">
+                </div>
+                <label>매칭 내용</label>
+                <div class="field">
+                    <textarea></textarea>
+                </div>
+                <div class="ui segment">
+                    <h3>Category</h3>
+                    <select class="ui dropdown" id="category">
+                        <option value="">활동분류</option>
+                        <option value="스포츠">스포츠</option>
+                        <option value="예술">예술</option>
+                        <option value="종교">종교</option>
+                        <option value="요리">요리</option>
+                        <option value="학술">학술</option>
+                        <option value="봉사">봉사</option>
+                        <option value="취업">취업</option>
+                        <option value="기타">기타</option>      
+                    </select>
+                </div>
+        
+                <div class="ui segment">
+                    <h3>지역</h3>
+                    <select class="ui dropdown" id="doSigu1" onchange="changeFunc('gu1');">
+                        <option value="">도/시</option>
+                        <script>
+                            for(i=0;i<3;i++){
+                                document.write("<option>"+doSi[i]+"</option>");
+                            }
+                        </script>         
+                    </select>
+                    <select class="ui dropdown" id="gu1">
+                            <option value="" disabled selected>구</option>
+                    </select>
+                </div>
+                <div class="ui segment">
+                        <input type="text" id="search" oninput="searchresult()">
+                    <div class='contaitner'>
                     <div id="map" align="center" style="width:300px;height:200px; margin: auto"></div>
                     <input type="text" id="loc_name">
                     <input type="text" id="loc_x">
                     <input type="text" id="loc_y">
-                </div>
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fce366b9ca100957cf09df739d9653f&libraries=services"></script>
-                <script>
-                    var infowindow = new daum.maps.InfoWindow({ zIndex: 1 });
-                    var container = document.getElementById('map');
-                    var options = {
-                        center: new daum.maps.LatLng(33.450701, 126.570667),
-                        level: 3
-                    };
-                    var markers = [];
-                    var map = new daum.maps.Map(container, options);
-                    //장소검색 객체
-                    var ps = new daum.maps.services.Places();
-                    var dd = document.getElementById("map");
-                    $('div').hover(
-                        function () {
+                    </div>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fce366b9ca100957cf09df739d9653f&libraries=services"></script>
+                    <script>
+                        var infowindow = new daum.maps.InfoWindow({zIndex:1});
+                        var container = document.getElementById('map');
+                        var options = {
+                            center: new daum.maps.LatLng(33.450701, 126.570667),
+                            level: 3
+                        };
+                        
+                        var markers =[];
+                        var map = new daum.maps.Map(container, options);
+                            //장소검색 객체
+                        var ps = new daum.maps.services.Places(); 
+                        var dd=document.getElementById("map");
+                        $('div').hover(
+                            function() {
+                                resizeMap();
+                                relayout();
+                                
+                            }
+                        )
+                        function resizeMap() {
+                            
+                            dd.style.width = dd.parentElement.style.width;
+                            dd.style.height = '300px';
+                        };
+                        
+                        setTimeout(function() { 
                             resizeMap();
                             relayout();
-
-                        }
-                    )
-                    function resizeMap() {
-
-                        dd.style.width = dd.parentElement.style.width;
-                        dd.style.height = '300px';
-                    };
-
-                    setTimeout(function () {
-                        resizeMap();
-                        relayout();
                         // rest of code here
                     }, 2300);
-
+                        
                     function relayout() {
-
+                        
                         // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
                         // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
                         // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
                         map.relayout();
                     };
-
-
-                    function searchresult() {
-
-                        var words = document.getElementById("search").value;
-                        ps.keywordSearch(words, placesSearchCB);
-
-
-                    };
-
-                    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-                    function placesSearchCB(data, status, pagination) {
+                    
+               
+                    function searchresult(){
+        
+                            var words = document.getElementById("search").value; 
+                            ps.keywordSearch(words, placesSearchCB);
+        
+                          
+                        };
+                       
+                        // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+                        function placesSearchCB (data, status, pagination) {
                         if (status === daum.maps.services.Status.OK) {
-
+        
                             // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                             // LatLngBounds 객체에 좌표를 추가합니다
                             var bounds = new daum.maps.LatLngBounds();
-                            //기존 마커 제거 재검색시
-                            for (var i = 0; i < markers.length; i++) {
+                                //기존 마커 제거 재검색시
+                                for ( var i = 0; i < markers.length; i++ ) {
                                 infowindow.close();
                                 markers[i].setMap(null);
-                            }
-                            markers = [];
-                            for (var i = 0; i < data.length; i++) {
-                                displayMarker(data[i]);
+                                } 
+                                markers = [];
+                            for (var i=0; i<data.length; i++) {
+                                displayMarker(data[i]);    
                                 bounds.extend(new daum.maps.LatLng(data[i].y, data[i].x));
-                            }
-
+                            }       
+        
                             // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                             map.setBounds(bounds);
-                        }
+                        } 
                     }
                     // 지도에 마커를 표시하는 함수입니다
                     function displayMarker(place) {
-
+                        
                         // 마커를 생성하고 지도에 표시합니다
                         var marker = new daum.maps.Marker({
                             map: map,
-                            position: new daum.maps.LatLng(place.y, place.x)
+                            position: new daum.maps.LatLng(place.y, place.x) 
                         });
                         markers.push(marker);
-
+                        
                         // 마커에 클릭이벤트를 등록합니다
-                        daum.maps.event.addListener(marker, 'click', function () {
+                        daum.maps.event.addListener(marker, 'click', function() {
                             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                             infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                             infowindow.open(map, marker);
-                            document.getElementById("loc_name").value = place.place_name;
-                            document.getElementById("loc_x").value = place.x;
-                            document.getElementById("loc_y").value = place.y;
-
+                            document.getElementById("loc_name").value=place.place_name;
+                            document.getElementById("loc_x").value=place.x;
+                            document.getElementById("loc_y").value=place.y;
+                            
                         });
-
+                        
                     }
-
-
-
-                </script>
-            
-            </div>-->
-            <div class="actions">
-                <button type="submit" class="ui approve button">등록</button>
-                <div class="ui cancel button">취소</div>
-            </div>
+        
+        
+                    
+                    </script>
         </div>
-
+    </div>
     </form>
 
 
-
+    <div class="actions">
+    <div class="ui approve button">등록</div>
+    <div class="ui cancel button">취소</div>
+    </div>
 </div>
