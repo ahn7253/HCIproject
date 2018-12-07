@@ -1,15 +1,16 @@
-<div class="ui longer modal" style="margin-left:10%; margin-top:10%; width:80%; height: 70%;">
-
+<script src="/customJS/districtOfCity.js"></script>
     <form class="ui form" action="/maching/registeraction" method="POST">
         <h3 class="ui dividing header" style="text-align: center; margin-bottom:2%">매칭 수정하기</h3>
         <div class="field" style="width:80%; margin:auto;">
             <label>매칭 제목</label>
             <div class="field">
-                <input type="text" name="mname" placeholder="현재 매칭" readonly/>
+                <!-- 여기에 메칭 기존 제목 -->
+                <input type="text" name="mname" placeholder="현재 매칭" value="볼링 경기도 정기전">
             </div>
             <label>매칭 내용</label>
             <div class="field">
-                <textarea name="content"></textarea>
+                <!-- 여기에 메칭 기존 상세내용 -->
+                <textarea name="content">상세내용: 볼링을 좋아하는 경기도 학생들을 모아 볼링 대회를 개최합니다. 장소는 인계동 볼링장입니다! 함께 즐겨요 문의 사항이나 장소 변경 문의는 메칭 방장을 통해 컨택해주세요! 참가비는 만원입니다</textarea>
             </div>
             <label>매칭 수</label>
             <div class="field">
@@ -17,9 +18,10 @@
             </div>
             <div class="ui segment">
                 <h3>Category</h3>
+                <!-- 기존 선택된 거에 selected -->
                 <select class="ui dropdown" id="category" name="category">
                     <option value="">활동분류</option>
-                    <option value="스포츠">스포츠</option>
+                    <option value="스포츠" selected>스포츠</option>
                     <option value="예술">예술</option>
                     <option value="종교">종교</option>
                     <option value="요리">요리</option>
@@ -34,19 +36,43 @@
                 <h3>지역</h3>
                 <select class="ui dropdown" id="doSigu1" onchange="changeFunc('gu1');" name="f_area">
                     <option value="">도/시</option>
+                    <!-- ===============   기존내용 값======================-->
                     <script>
+                        var selectedDosi="경기도"; // 기존에 선택된 지역
+                        var selectedGu="수원시 영통구"; // 기존에 선택된 지역 detail 
                         for (i = 0; i < 3; i++) {
+                            if(selectedDosi==doSi[i])
+                            document.write("<option selected>" + doSi[i] + "</option>");
+                            else
                             document.write("<option>" + doSi[i] + "</option>");
+                        }
+                        var ops 
+                        window.onload = function () {
+                            changeFunc('gu1');
+                            ops = document.getElementById("gu1").options;
+                            for(var i=0;i<ops.length;i++)
+                            {
+                                if(ops[i].value==selectedGu)
+                                {
+                                    var selection = document.getElementById("gu1");
+                                    selection.selectedIndex=i;   
+                                }
+                            }
                         }
                     </script>
                 </select>
                 <select class="ui dropdown" id="gu1" name="s_area">
+                    <script>document.write("<option selected>" + selectedGu + "</option>");</script>
                     <option value="" disabled selected>구</option>
                 </select>
             </div>
             
             <div class="ui segment">
-                <input type="text" id="search" oninput="searchresult()">
+                <h3>매칭 장소 설정</h3>
+                <div class="ui icon input">
+                    <input type="text" id="search" oninput="searchresult()" placeholder="Search...">
+                    <i class="circular search link icon" onclick="searchresult()"></i>
+                </div>
                 <div class='contaitner'>
                     <div id="map" align="center" style="width:300px;height:200px; margin: auto"></div>
                     <input type="text" id="loc_name">
@@ -161,5 +187,3 @@
     </form>
 
 
-
-</div>
