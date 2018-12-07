@@ -62,4 +62,16 @@ router.post('/registeraction', function (req, res) {
 
 });
 
+router.get('/search',function(req,res){
+  var keyword = req.query.kw;
+  var query = "SELECT m.mname,m.1st_area,m.2nd_area,m.category,m.number, ml.cid, c.cname FROM matching AS m, matching_list AS ml, club AS c WHERE (m.mname LIKE '%"+keyword+"%' OR m.content LIKE '%"+keyword+"%' OR m.category LIKE '%"+keyword+"%' OR m.1st_area LIKE '%"+keyword+"%' OR m.2nd_area LIKE '%"+keyword+"%') AND m.mid = ml.mid AND ml.author=1 AND ml.cid = c.cid";
+  var Matching = DB.getTable('Matching');
+
+  Matching.special(query,function(err,results){
+    if(err)
+      throw err;
+    res.send(results);
+  })
+});
+
 module.exports = router;
