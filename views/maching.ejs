@@ -25,8 +25,8 @@
     <div class="column">
         <div class="ui search" style="display:block;margin:auto;margin-top:1.5%">
             <div class="ui icon input" style="margin-left:25%; width:50%;margin-bottom:2%">
-                <input class="prompt" type="text" placeholder="Common passwords..." onkeypress="return runScript(event)">
-                <i class="circular search link icon"></i>
+                <input class="prompt" id="cc_searchinput" type="text" placeholder="Common passwords..." onkeypress="return runScript(event)">
+                <i class="circular search link icon" onclick="search()"></i>
                 <div class="results"></div>
             </div>
         </div>
@@ -78,81 +78,34 @@
 <!--메칭 검색 결과-->
 <div class="ui segment" style="width: 90%; margin: auto;">
     <div class="ui one column very relaxed grid">
-        <div class="column" onMouseOut="this.style.height='100%'">
+        <div class="column" id="matching_list" onMouseOut="this.style.height='100%'"">
             <!--여기에 결과를 넣으세요-->
-            <div class="ui segment" onclick="detailmodal();">
-                <div>
-                    <h2 style="float:left">수원 축구 매칭구합니다.</h2>
-                    <span style="float:right">5/10</span>
-                    <div class="ui clearing divider"></div>
-                    <p>경기도 수원시 팔달구</p>
-                    <!-- <span class= 'contentList' style="display:block;">
-                            <a href="#">세부내용 요약</a>
-                            <div class="ui segment" style="width: 90%; margin: auto;">
-                                <ul class="detail" style="display:block">상세내용 축구팀 모집합니다 10팀으로 구성되어~~~~어쩌구 저쩌구</ul>
-                                <div class="ui labeled button" tabindex="0" style="float:right">
-                                    <div class="ui button">
-                                        <i class="heart icon"></i> Like
-                                    </div>
-                                    <a class="ui basic label">
-                                        2,048
-                                    </a>
-                                </div>
-                                <button class="ui teal button" style="float:right">참여하기</button>
-                            </div>
-                        </span> -->
-                </div>
-            </div>
-            <!--onMouseOver="this.style.height='300px'" onMouseOut="this.style.height='100%'"-->
-            <div class="ui segment">
-                <div>
-                    <h2>콜라보 공연합시다.</h2>
-                    <span style="float:right">2/5</span>
-                    <div class="ui clearing divider"></div>
-                    <span class='contentList' style="display:block;">
-                        <p>서울시 성북구 혜화동</p>
-                        <!-- <a href="#">세부내용 요약</a>
-                            <div class="ui segment" style="width: 90%; margin: auto;">
-                                <ul class="detail" style="display:block; font-size: 20px">상세내용 농구리그 팀 모집합니가 10팀으로 구성되어~~~~어쩌구 저쩌구</ul>
-                                <div class="ui labeled button" tabindex="0" style="float:right">
-                                    <div class="ui button">
-                                        <i class="heart icon"></i> Like
-                                    </div>
-                                    <a class="ui basic label">
-                                        2,048
-                                    </a>
-                                </div>
-                                <button class="ui teal button" style="float:right">참여하기</button>
-                            </div> -->
-                    </span>
-                </div>
-            </div>
+            <div class="
+            ui segment" onclick="detailmodal();" id="result" style="display:none">
+            <div>
+                <span style="float:left">
+                    <h3 style="display:inline; margin-right:1vw">
+                        1
+                    </h3>
+                    <h2 style="display:inline" class="cc_mname" id="">수원 축구 매칭구합니다.</h2>
+                </span>
 
-            <div class="ui segment">
-                <div>
-                    <h2>수원 농구 리그하실 분들 구합니다.</h2>
-                    <span style="float:right">5/12</span>
-                    <div class="ui clearing divider"></div>
-                    <span class='contentList' style="display:block;">
-                        <p>경기도 수원시 팔달구</p>
-                        <!-- <a href="#">세부내용 요약</a>
-                                <div class="ui segment" style="width: 90%; margin: auto;">
-                                    <ul class="detail" style="display:block; font-size: 20px">상세내용 농구리그 팀 모집합니가 10팀으로 구성되어~~~~어쩌구 저쩌구</ul>
-                                    <div class="ui labeled button" tabindex="0" style="float:right">
-                                        <div class="ui button">
-                                            <i class="heart icon"></i> Like
-                                        </div>
-                                        <a class="ui basic label">
-                                            2,048
-                                        </a>
-                                    </div>
-                                    <button class="ui teal button" style="float:right">참여하기</button>
-                                </div> -->
-                    </span>
+                <span style="float:right" class="cc_number" id="">5/10</span>
+                <div class="ui clearing divider"></div>
+
+                <div class="ui three column grid">
+                    <div class="wide column cc_location" id="">지역</div>
+                    <div class="wide column cc_cname">동아이이름</div>
+                    <div class="wide column cc_category">카테고리</div>
+
                 </div>
+
             </div>
         </div>
+        <!--onMouseOver="this.style.height='300px'" onMouseOut="this.style.height='100%'"-->
+
     </div>
+</div>
 </div>
 <% include ./util/modal/detailmodal %>
 
@@ -166,33 +119,59 @@
 </button>
 <% include ./util/modal/matchingmodal %>
 
-    <br>
+<br>
 
 
-    <script>   
-        $('.ui.dropdown').dropdown('set selected', 0);
-        function modalOn() {
-            $('.ui.longer.modal')
-                .modal('show')
-                ;
-        };
+<script>
+    function search() {
+        var kw = $('#cc_searchinput').val();
+        $('#cc_searchinput').val("");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var results = JSON.parse(this.responseText);
+                    for (var i = 0; i < results.length; i++)
+                        addList(results[i]);
+                }
 
-        $(".circular.search.link.icon").click(function () {
-            alert("result will be show");
-        });
 
-        function runScript(e) {
-            //See notes about 'which' and 'key'
-            if (e.keyCode == 13) {
-                alert("result will be show");
-                return false;
             }
         }
+        xhttp.open("GET", "/maching/search?kw=" + kw, true);
+        xhttp.send();
+    }
+    function addList(r) {
+        var me = $('#result').clone(true, true).attr('id', r.mid).appendTo('#matching_list')
+        me.find('.cc_mname').html(r.mname)
+        me.find('.cc_number').html("/" + r.number)
+        me.find('.cc_location').html(r["1st_area"] + " " + r["2nd_area"])
+        me.find('.cc_cname').html(r.cname)
+        me.find('.cc_category').html(r.category)
+        me.show();
+    }
 
-        function detailmodal() {
-            $('#detail')
-                .modal('show')
-                ;
-        };
+    $('.ui.dropdown').dropdown('set selected', 0);
+    function modalOn() {
+        $('.ui.longer.modal')
+            .modal('show')
+            ;
+    };
 
-    </script>
+    
+
+    function runScript(e) {
+        //See notes about 'which' and 'key'
+        if (e.keyCode == 13) {
+            search();
+            return true;
+        }
+    }
+
+    function detailmodal() {
+        $('#detail')
+            .modal('show')
+            ;
+    };
+
+</script>
