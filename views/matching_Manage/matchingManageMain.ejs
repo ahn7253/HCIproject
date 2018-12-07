@@ -202,7 +202,7 @@
         <button class="circular green huge ui icon button" align="center">
             <a class="item" onclick="manageModalOn()">
                 <i style="color:white"class="large icon cog"></i>
-                <div class="floating ui red label" style="left:6.5em">22</div>
+                <div class="floating ui red label" style="left:6.5em">3</div>
             </a>
         </button>
             <div class="tooltiptext" >
@@ -212,17 +212,29 @@
                 <div class="content" style="position: relative">
                 <a class="item" href="/maching/mID/confirm"  style="color:white">
                     <i class="icon mail"></i>매칭 요청
-                    <div class="mini ui red label">22</div>
+                    <div class="mini ui red label">2</div>
                 </a>
+                </div>
+                <div class="content" style="position: relative; cursor: pointer" onclick="messageRead()">
+                    <a class="item" style="color:white">
+                        <i class="icon mail"></i>매칭 문의
+                        <div class="mini ui red label">1</div>
+                    </a>
                 </div>
 
                 
             </div>
             
         </div>
+        <% include ../util/modal/messagemodal_read %>
+        
     <% } %>
     <script>
-       
+       function messageRead() {
+            $('#messageRead')
+                .modal('show')
+                ;
+        };
     </script>
    
 

@@ -70,25 +70,50 @@
             <div class="ui segment">
                 <h3>매칭 장소 설정</h3>
                 <div class="ui icon input">
-                    <input type="text" id="search" oninput="searchresult()" placeholder="Search...">
+                    <input type="text" id="search" oninput="searchresult()" style="margin-bottom: 1em" placeholder="Search...">
                     <i class="circular search link icon" onclick="searchresult()"></i>
                 </div>
                 <div class='contaitner'>
                     <div id="map" align="center" style="width:300px;height:200px; margin: auto"></div>
                     <input type="text" id="loc_name">
-                    <input type="text" id="loc_x">
-                    <input type="text" id="loc_y">
+                    
                 </div>
                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fce366b9ca100957cf09df739d9653f&libraries=services"></script>
                 <script>
+                    var geocoder = new daum.maps.services.Geocoder();//지도검색
+                    var lPos; //검색좌표 얻을때 getLng(), getLat()이용
+                    var addressName;//주소
+                    var callback1 = function(result, status) {
+                        if (status === daum.maps.services.Status.OK) {
+                            
+                            document.getElementById("loc_name").value =result[0].address.address_name;
+                        }
+                    }
+                   
+                   function parseValueDone (place) {
+                        lPos=new daum.maps.LatLng(place.y,place.x);
+                        geocoder.coord2Address(lPos.getLng(), lPos.getLat(), callback1);
+                        
+                    };
+                    
+                    //주소결과 콜백
                     var infowindow = new daum.maps.InfoWindow({ zIndex: 1 });
+
                     var container = document.getElementById('map');
+                    //<!---수정 전 이전 주소값 처음 설정일 경우 기본 값 37.2828325063457, 127.04640007123으로-->
+                    var y = 37.2828325063457;
+                    var x = 127.046400071239;
                     var options = {
-                        center: new daum.maps.LatLng(33.450701, 126.570667),
+                        center: new daum.maps.LatLng(y, x),
                         level: 3
                     };
                     var markers = [];
                     var map = new daum.maps.Map(container, options);
+                    var marker = new daum.maps.Marker({
+                            map: map,
+                            position: new daum.maps.LatLng(y, x)
+                        });
+                   
                     //장소검색 객체
                     var ps = new daum.maps.services.Places();
                     var dd = document.getElementById("map");
@@ -154,7 +179,7 @@
                     function displayMarker(place) {
 
                         // 마커를 생성하고 지도에 표시합니다
-                        var marker = new daum.maps.Marker({
+                        marker = new daum.maps.Marker({
                             map: map,
                             position: new daum.maps.LatLng(place.y, place.x)
                         });
@@ -165,11 +190,10 @@
                             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                             infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                             infowindow.open(map, marker);
-                            document.getElementById("loc_name").value = place.place_name;
-                            document.getElementById("loc_x").value = place.x;
-                            document.getElementById("loc_y").value = place.y;
+                            
+                            parseValueDone(place);
 
-                        });
+                        })
 
                     }
 
@@ -179,7 +203,7 @@
             
             </div>
             <div class="actions">
-                <button type="submit" class="ui approve button">등록</button>
+                <button type="submit" class="ui approve button">수정</button>
                 <div class="ui cancel button">취소</div>
             </div>
         </div>
