@@ -85,7 +85,8 @@ Table.prototype.select = function (where, callback) {
 
 Table.prototype.special = function (query, callback) {
     this.pool.getConnection(function (err, conn) {
-
+        if(err)
+            throw err;
         conn.query(query, function (err, results) {
             if (err)
                 callback(err, null)

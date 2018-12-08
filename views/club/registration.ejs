@@ -60,7 +60,7 @@
           <hr>
           <div class="field">
               <label style="font-size:1vw;text-align: left;float: left;">지역</label>
-            <select name="f_area" class="ui dropdown" id="doSi" onchange="changeFunc();">
+            <select name="f_area" class="ui dropdown" id="doSigu0" onchange="changeFunc('gu0');">
               <option value="">도/시</option>
               <script>
                 for (i = 0; i < 3; i++) {
@@ -68,7 +68,7 @@
                 }
               </script>
             </select>
-            <select class="ui dropdown" id="gu" name="s_area">
+            <select class="ui dropdown" id="gu0" name="s_area">
               <option value="" disabled selected>구</option>
             </select>
           </div>
@@ -127,7 +127,7 @@
 
     var checkID = false;
     function formcheck() {
-      var doSi = document.getElementById('doSi');
+      var doSi = document.getElementById('doSigu0');
       var gu = document.getElementById('gu');
       var category = document.getElementById('category');
       var checkform = true;
