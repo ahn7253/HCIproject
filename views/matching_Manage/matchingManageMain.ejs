@@ -1,19 +1,240 @@
-<div class="ui one column stackable grid">
+
+<style>
+    .tooltip{
+        position: relative;
+        display: block;
+        border-bottom: 1px d#000000 black;
+    }
+    .tooltip .tooltiptext {
+    visibility: hidden;
+    width:10em;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 12px 12px 12px 12px ;
+    top:-4em;
+    left:-5em;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 999;
+    }
+    .tooltip .tooltiptext:before{
+    content:'';
+    display:block;
+    width:0;
+    height:0;
+    position:absolute;
+
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top:10px solid black;
+    left:7em;
+
+    bottom:-10px;
+}
+
+    .tooltip:hover .tooltiptext {
+    visibility: visible;
+    }
+</style>
+
+<div class="ui one column stackable grid"  style="margin:5em; margin-bottom: -5em;margin-top: -1em;">
     <div class="column">
-        <div class="ui segment">
-            <h3>내 동아리 매칭 목록</h3>
+        <div class="ui segment" style="text-align: center">
+            <h3>Hello Balling World! - "경기지역"</h3>
         </div>
+        <div class="ui divider"></div>
     </div>
 </div>
-<div class="ui one column stackable grid">
+
+<div class="ui stackable grid" style="margin:5em; margin-top: 4em"> 
+    
+    <div class="two column row">
     <div class="column">
         <div class="ui segment">
-            <h4>경기 볼링 연합 정기전</h4>
-            <p>참여 동아리수 : 5 club</p>
-            <p>참여 인원 : 35 명</p>
-            <p>장소 : 인계동 00볼링장</p>
-            <p>시간 : 2018.12.25 / 4pm</p>
-            <button class="ui button">나도 참가하기</button>
+            <h3>세부내용</h3>
+            <p># 주최 동아리: 아주대 Apin</p>
+            <p># 참여 동아리수 : 5 club</p>
+            <p># 참여 인원 : 35 명</p>
+            <p># 장소 : 인계동 00볼링장</p>
+            <p># 상세내용: 볼링을 좋아하는 경기도 학생들을 모아 볼링 대회를 개최합니다. 장소는 인계동 볼링장입니다! 함께 즐겨요 문의 사항이나 장소 변경 문의는 메칭 방장을 통해 컨택해주세요! 참가비는 만원입니다</p>
+        </div>
+    </div>      
+        <div class="column">
+            <div class="ui segment">
+
+            <!-------------------------------- 만남 장소 지도-------------------->
+            <!-------------------------------- 만남 장소 지도-------------------->
+                <h4 id="location">메칭 장소</h4>
+                
+                <div id="Map" style="width:2000px;height:2000px;"></div>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fce366b9ca100957cf09df739d9653f&libraries=services"></script>
+                    <script>
+                    var mapDiv=document.getElementById("Map");
+                    mapDiv.style.width = mapDiv.parentElement.style.width;
+                    mapDiv.style.height = '300px';
+                    var geocoder = new daum.maps.services.Geocoder();
+
+                    var lPos = new daum.maps.LatLng(37.56496830314491, 126.93990862062978);//x,y값 DB 에서 받아옴
+
+                    var x= lPos.getLat();
+                    var locationName ="매칭 장소 이름"; //매칭 장소 이름 가져오가
+                    
+                    
+                    var MapContainer  = document.getElementById('Map'); // 이미지 지도를 표시할 div  
+                        MapOption = { 
+                            center: new daum.maps.LatLng(lPos.getLat(), lPos.getLng()), // 이미지 지도의 중심좌표
+                            level: 3, // 이미지 지도의 확대 레벨
+                        };    
+
+                    // 이미지 지도를 생성합니다
+                   
+                    var map = new daum.maps.Map(MapContainer, MapOption);
+                    var marker = new daum.maps.Marker(
+                    {   map: map,
+                        position: new daum.maps.LatLng(lPos.getLat(), lPos.getLng())
+                    });
+                    //info
+                    var iwContent = '<div style="padding:5px;">'+locationName+'<br><a href="http://map.daum.net/link/map/'+locationName+',33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="http://map.daum.net/link/to/'+locationName+',33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>' // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                    iwPosition = new daum.maps.LatLng(lPos.getLat(), lPos.getLng()); //인포윈도우 표시 위치입니다
+
+                    // 인포윈도우를 생성합니다
+                    var infowindow = new daum.maps.InfoWindow({
+                        position : iwPosition, 
+                        content : iwContent 
+                    });
+                    
+                    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+                    infowindow.open(map, marker);
+
+                    $(window).resize(function() {
+                        
+                        MapContainer  = document.getElementById('Map');
+                        MapContainer.style.width = MapContainer.parentElement.style.width;
+                        map.relayout();
+                    });
+
+                    var callback1 = function(result, status) {
+                        if (status === daum.maps.services.Status.OK) {
+                            locationName=result[0].address.address_name;
+                            locationName+=" 상세주소 "//상세주소 값 들어가야함.
+                            console.log(locationName);
+                            infowindow.setContent('<div class="ui segment">'+locationName+'<br><a style="margin:2px;white-space:nowrap" href="http://map.daum.net/link/map/'+locationName+',33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a><a href="http://map.daum.net/link/to/'+locationName+',33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>') // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                            document.getElementById("location").innerHTML='만남 장소: '+locationName;
+                        }
+                    };
+                    
+                    $(document).ready(function(){
+                    
+                        geocoder.coord2Address(lPos.getLng(), lPos.getLat(), callback1);
+                        marker.text=locationName;
+                        console.log(locationName);
+                    
+                    });
+                    </script>
+            </div>
+
+            <!-------------------------------- 만남 장소 지도-------------------->
+            <!-------------------------------- 만남 장소 지도 끝-------------------->
         </div>
     </div>
-</div>
+    <div class="ui divider"></div>
+    
+    <div class="two column row">
+        <div class="column">
+            <div class="ui segment">
+                <h2>참여 동아리</h2>
+                <div class="ui relaxed divided list">
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                        <a class="header" href="#">아주대 Apin</a>
+                        <div class="description">12명</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                        <a class="header" href="#">경기대 볼던지기</a>
+                        <div class="description">5명</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                        <a class="header" href="#">아주대 Apin</a>
+                        <div class="description">8명</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+
+        <div class="column">
+            <div class="ui segment">
+                <h3>QnA</h3>
+                <div class="ui relaxed divided list">
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                             <a class="header" href="">모임 후에 뒷풀이 하나요?</a>
+                             <div class="description">Updated 22 mins ago</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="users icon"></i>
+                        <div class="content">
+                            <a class="header" href="">개인 볼링화 지참시 할인되나요?</a>
+                            <div class="description">Updated 34 mins ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </div>
+
+<!-- 매칭 방장일 경우 :true-->
+<!-- 매칭 방장일 경우 :true-->
+    <% if(true){ %>
+        <div class="tooltip" style="position: fixed; bottom:20px; right: 10px;  z-index: 998;">
+        <button class="circular green huge ui icon button" align="center">
+            <a class="item" onclick="manageModalOn()">
+                <i style="color:white"class="large icon cog"></i>
+                <div class="floating ui red label" style="left:6.5em">3</div>
+            </a>
+        </button>
+            <div class="tooltiptext" >
+                <a class="item" href="/maching/mID/modify" style="color:white;">
+                    <i class="icon edit"></i>매칭 수정하기
+                </a>
+                <div class="content" style="position: relative">
+                <a class="item" href="/maching/mID/confirm"  style="color:white">
+                    <i class="icon mail"></i>매칭 요청
+                    <div class="mini ui red label">2</div>
+                </a>
+                </div>
+                <div class="content" style="position: relative; cursor: pointer" onclick="messageRead()">
+                    <a class="item" style="color:white">
+                        <i class="icon mail"></i>매칭 문의
+                        <div class="mini ui red label">1</div>
+                    </a>
+                </div>
+
+                
+            </div>
+            
+        </div>
+        <% include ../util/modal/messagemodal_read %>
+        
+    <% } %>
+    <script>
+       function messageRead() {
+            $('#messageRead')
+                .modal('show')
+                ;
+        };
+    </script>
+   
+

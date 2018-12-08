@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -108,15 +108,29 @@
         <a href="/club" class="orange item" id='club'>동아리</a>
         <a href="/group" class="yellow item" id='group'>그룹</a>
         <a href="/board" class="olive item" id='board'>게시판</a>
-        <a href="/maching" class="green item" id='maching'>매칭하기</a> 
+        <div class="ui dropdown green item" id="drop" tabindex="0" onmouseover="dropOn()" onmouseleave="dropOff()">
+                메칭
+                <i class="dropdown icon"></i>
+                <div class="menu transition hidden" tabindex="-1">
+                  <div class="item"><a href="/maching" style="color:black">메칭 찾기</a></div>
+                  <div class="item"><a href="/maching/myMatchingList" style="color:black">나의 메칭</a></div>
+                  <div class="item"><a href="/maching/history" style="color:black">메칭 히스토리</a></div>
+                </div>
+              </div>
         <% if (title) { %>
             <script>
                 //menu id 값 받음
+                
+                
                 var selectedMenu=document.getElementById("mainTitle").textContent;
+                var nowUrl =location.href;
+                if(nowUrl.includes("maching"))
+                    document.getElementById('drop').style.background="#069E14";
                 var menuActived=document.getElementById(selectedMenu);
                 menuActived.className="active "+menuActived.className;
+                
             </script>
-        <% } %>
+        <% } %>  
     </div>
 </div>
 `
@@ -127,9 +141,17 @@
              <%- body %>
     </div>
     <footer>
-        <img src=/img/footerimg.png style="height: 50%;width: 100%; margin-top: 7%">
+        <img src=/img/footerimg.png style="height: 30%;width: 100%; margin-top: 7%">
         <h4 style="text-align: center;">Club collecter.Corp site designed by CC | HCI | ajou.univ </h4>
         <br>
     </footer>
 </body>
 </html>
+<script>
+    function dropOn(){
+    $('#drop').dropdown('show');
+    }
+    function dropOff(){
+    $('#drop').dropdown('hide');
+    }
+</script> 
