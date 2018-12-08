@@ -31,12 +31,12 @@ router.get('/myMatchingList', function (req, res, next) {
 
 //=================매칭 요청 확인 페이지
 router.get('/mID/confirm', function (req, res, next) {
-  res.render('matching_Manage/matchingConfirm', { title: '매칭요청관리',matchingName:'볼링 경기도 정기전', session: req.mysession, layout: 'layouts/layout2' });
+  res.render('matching_Manage/matchingConfirm', { title: '매칭요청관리', matchingName: '볼링 경기도 정기전', session: req.mysession, layout: 'layouts/layout2' });
 
 });
 //==================매칭 수정
 router.get('/mID/modify', function (req, res, next) {
-  res.render('matching_Manage/matchingModify', { title: '매칭요청관리',matchingName:'볼링 경기도 정기전', session: req.mysession, layout: 'layouts/layout2' });
+  res.render('matching_Manage/matchingModify', { title: '매칭요청관리', matchingName: '볼링 경기도 정기전', session: req.mysession, layout: 'layouts/layout2' });
 
 });
 //=========================
@@ -60,23 +60,27 @@ router.post('/registeraction', function (req, res) {
   }
   if (req.session.user) {
 
-    Club_User.select({ uid: req.session.user.uid, author: 2 }, function (err, results) {
+    Club_User.select({ uid: req.session.user.uid, author: 2 }, function (err, results) { // get cid
       if (err)
         throw err;
 
       condition1.cid = results[0].cid
 
-      Matching.getmaxid(function (maxid) {
+      Matching.getmaxid(function (maxid) { // get maxid of mid
         condition.mid = maxid + 1;
         condition1.mid = maxid + 1;
+        //insert matching
         Matching.insert(condition, function (err, results) {
           if (err)
             throw err;
+            
+            //insert MatchingList
+          MatchingList.insert(condition1, function (err, results) {
+            if (err)
+              throw err;
+          })
         })
-        MatchingList.insert(condition1, function (err, results) {
-          if (err)
-            throw err;
-        })
+
       })
 
       res.redirect('/maching');
@@ -86,14 +90,14 @@ router.post('/registeraction', function (req, res) {
 
 });
 
-router.get('/search',function(req,res){
+router.get('/search', function (req, res) {
   var keyword = req.query.kw;
-  var query = "SELECT m.mname,m.1st_area,m.2nd_area,m.category,m.number, ml.cid, c.cname FROM matching AS m, matching_list AS ml, club AS c WHERE (m.mname LIKE '%"+keyword+"%' OR m.content LIKE '%"+keyword+"%' OR m.category LIKE '%"+keyword+"%' OR m.1st_area LIKE '%"+keyword+"%' OR m.2nd_area LIKE '%"+keyword+"%') AND m.mid = ml.mid AND ml.author=1 AND ml.cid = c.cid";
+  var query = "SELECT m.mname,m.1st_area,m.2nd_area,m.category,m.number, ml.cid, c.cname FROM matching AS m, matching_list AS ml, club AS c WHERE (m.mname LIKE '%" + keyword + "%' OR m.content LIKE '%" + keyword + "%' OR m.category LIKE '%" + keyword + "%' OR m.1st_area LIKE '%" + keyword + "%' OR m.2nd_area LIKE '%" + keyword + "%') AND m.mid = ml.mid AND ml.author=1 AND ml.cid = c.cid";
   console.log(query);
   var Matching = DB.getTable('Matching');
 
-  Matching.special(query,function(err,results){
-    if(err)
+  Matching.special(query, function (err, results) {
+    if (err)
       throw err;
     res.send(results);
   })
