@@ -66,7 +66,8 @@ router.get('/logoutaction', function (req, res) {
  */
 router.post('/registeraction', function (req, res) {
     var User = DB.getTable("User")
-
+    var auth = require('../utils/authEmail').getInstance();
+    
     var values = {
         "id": req.body.id,
         "pw": req.body.pw,
@@ -75,21 +76,27 @@ router.post('/registeraction', function (req, res) {
         "email": req.body.email,
         "author": 0
     }
-    
+
 
     User.getmaxid(function (uid) {
         uid++;
         values["uid"] = uid;
-        
+
 
         User.insert(values, function (err, results) {
             if (err)
                 throw err;
+
+
+            //send AuthEMail
+            auth.sendAuthMail(values.email);
         });
     })
 
+    
 
-    res.send("<script>location.href='/';</script>");
+
+    res.send("<script>alert('이메일인증을 해주시기바랍니다');location.href='/';</script>");
 });
 /**
  *  GET /user/checkdupid/"체크할 아이디"
@@ -100,23 +107,37 @@ router.post('/registeraction', function (req, res) {
  *  같은 아이디가 없을 시 : "accept" 라고 반환
  * 
  */
-router.get('/checkdupid/:id',function(req,res){
+router.get('/checkdupid/:id', function (req, res) {
     var id = req.params.id;
     var User = DB.getTable("User");
-    var condition={
-        "id":id
+    var condition = {
+        "id": id
     }
-    User.select(condition,function(err,results){
-        if(err)
+    User.select(condition, function (err, results) {
+        if (err)
             throw err;
-        if(results.length==0)
+        if (results.length == 0)
             res.send("accept");
         else
             res.send("reject");
     });
 });
 
-router.get('/registration',function(req,res){
+router.get('/authaction/:token', function (req, res) {
+    
+    var token = req.params.token;
+    var auth = require('../utils/authEmail').getInstance();
+
+    auth.acceptAuthMail(token, function (value) {
+        console.log("VALUE : "+value);
+        if (value)
+            res.redirect("<script>alert('재로그인 해주시기 바랍니다.!');history.back();</script>");
+        else
+            res.send("<script>alert('not valid!');history.back();</script>");
+    });
+});
+
+router.get('/registration', function (req, res) {
     res.render('user/registration');
 });
 

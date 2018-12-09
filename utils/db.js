@@ -30,12 +30,13 @@ Table.prototype.insert = function (values, callback) {
 
 
         conn.query(sql, [values], function (err, results) {
+            conn.release();
             if (err)
                 callback(err, null)
             else
                 callback(null, results)
 
-            conn.release();
+
         });
     })
 }
@@ -73,28 +74,49 @@ Table.prototype.select = function (where, callback) {
 
 
         conn.query(sql, function (err, results) {
+            conn.release()
             if (err)
                 callback(err, null)
             else
                 callback(null, results)
 
-            conn.release()
+
         })
     });
 }
 
 Table.prototype.special = function (query, callback) {
     this.pool.getConnection(function (err, conn) {
-        if(err)
+        if (err)
             throw err;
         conn.query(query, function (err, results) {
+            conn.release()
             if (err)
                 callback(err, null)
             else
                 callback(null, results)
 
-            conn.release()
+
         })
+    });
+}
+
+Table.prototype.update = function (setting, where, callback) {
+    var sql = "UPDATE " + this.tablename + " SET ? WHERE 1=1";
+    for (var e in where) {
+        sql = sql + " AND " + e + " = " + this.pool.escape(where[e])
+    }
+    this.pool.getConnection(function (err, conn) {
+        if (err)
+            throw err;
+        conn.query(sql, [setting], function (err, results) {
+            conn.release();
+            if (err)
+                callback(err, null)
+            else
+                callback(null, results)
+
+        });
     });
 }
 
