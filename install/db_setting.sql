@@ -1,9 +1,12 @@
 
+INSERT INTO club(cid,cname,url,school_name,1st_area,2nd_area,category) values(1,'z','CC','z','z','z z','z')
 
 
 --데이터베이스 설정입니다.
 
 CREATE DATABASE hci;
+
+USE hci
 
 CREATE TABLE user(
     uid int(10) not null,
@@ -16,8 +19,7 @@ CREATE TABLE user(
     PRIMARY KEY(uid)
 );
 
--- 관리자 계정.
-INSERT INTO user values(1,'admin','1234','CCManager','아주대학교','CC@clubcollector.com',1); 
+INSERT INTO user values(1,'admin','1234','CCManager','아주대학교','CC@clubcollector.com',2); 
 
 
 CREATE TABLE club(
@@ -33,7 +35,6 @@ CREATE TABLE club(
     PRIMARY KEY(cid)
 );
 
-INSERT INTO club(cid,cname,url,school_name,1st_area,2nd_area,category) values(1,'z','CC','z','z','z z','z')
 
 CREATE TABLE club_user(
     cid int(10) not null,
@@ -44,9 +45,6 @@ CREATE TABLE club_user(
     FOREIGN KEY(uid) REFERENCES user(uid)
 );
 
-0: 동아리원
-1: 임원단
-2: 회장
 
 CREATE TABLE club_bbs(
     bid int(10) not null,
@@ -110,8 +108,7 @@ CREATE TABLE matching_list(
     FOREIGN KEY(mid) REFERENCES matching(mid),
     FOREIGN KEY(cid) REFERENCES club(cid)
 );
-author : 1  -leader
-        0 - people
+
 
 CREATE TABLE bbs(
     bid int(10) not null,
