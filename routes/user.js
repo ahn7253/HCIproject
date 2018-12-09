@@ -131,7 +131,7 @@ router.get('/authaction/:token', function (req, res) {
     auth.acceptAuthMail(token, function (value) {
         console.log("VALUE : "+value);
         if (value)
-            res.redirect("<script>alert('재로그인 해주시기 바랍니다.!');history.back();</script>");
+            res.send("<script>alert('재로그인을 해주시기 바랍니다!');history.back();</script>");
         else
             res.send("<script>alert('not valid!');history.back();</script>");
     });
