@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/registration', function (req, res) {
-  if (req.session.user)
+  if (req.session.user&&req.session.user.author>0)
     res.render('club/registration', { title: 'club', session: req.mysession, layout: 'layouts/layout2' });
   else
     res.send("<script>alert('you arent in login.');history.back();</script>")

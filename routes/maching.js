@@ -41,6 +41,7 @@ router.get('/mID/modify', function (req, res, next) {
 });
 //=========================
 router.post('/registeraction', function (req, res) {
+
   var Club_User = DB.getTable('Club_User')
   var Matching = DB.getTable('Matching')
   var MatchingList = DB.getTable('MatchingList')
@@ -58,7 +59,7 @@ router.post('/registeraction', function (req, res) {
     author: 1
 
   }
-  if (req.session.user) {
+  if (req.session.user&&req.session.user.author>0) {
 
     Club_User.select({ uid: req.session.user.uid, author: 2 }, function (err, results) { // get cid
       if (err)
