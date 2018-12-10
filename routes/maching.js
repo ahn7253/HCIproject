@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('maching', { title: 'maching', session: req.mysession, layout: 'layouts/layout2' });
+  res.render('maching', { title: 'maching', session: 'dd', layout: 'layouts/layout2' });
 
 });
 
@@ -14,19 +14,19 @@ router.get('/', function (req, res, next) {
 
 //메칭 관리 메뉴 라우터
 router.get('/manage', function (req, res, next) {
-  res.render('matching_Manage/matchingManageMain', { title: 'mymaching', session: req.mysession, layout: 'layouts/layout2' });
+  res.render('matching_Manage/matchingManageMain', { title: 'mymaching', session: 'dd', layout: 'layouts/layout2' });
 
 });
 //메칭 히스토리 메뉴 라우터
 router.get('/history', function (req, res, next) {
-  res.render('matching_Manage/history', { title: 'mymaching', session: req.mysession, layout: 'layouts/layout2' });
+  res.render('matching_Manage/history', { title: 'mymaching', session: 'dd', layout: 'layouts/layout2' });
 
 });
 
 //===================나의 매칭 리스트
 router.get('/myMatchingList', function (req, res, next) {
 
-  if (req.session.user) {
+  if ('dd') {
     var Matching = DB.getTable('Matching');
     var MatchingList = DB.getTable('MatchingList');
     var Club_User = DB.getTable('Club_User');
@@ -52,7 +52,7 @@ router.get('/myMatchingList', function (req, res, next) {
         if(err)
           throw err;
        
-        res.render('matching_Manage/myMatchingList', { title: 'mymaching', session: req.mysession, layout: 'layouts/layout2',results:results });
+        res.render('matching_Manage/myMatchingList', { title: 'mymaching', session: 'dd', layout: 'layouts/layout2',results:results });
 
       });
 
@@ -70,12 +70,12 @@ router.get('/myMatchingList', function (req, res, next) {
 
 //=================매칭 요청 확인 페이지
 router.get('/mID/confirm', function (req, res, next) {
-  res.render('matching_Manage/matchingConfirm', { title: '매칭요청관리', matchingName: '볼링 경기도 정기전', session: req.mysession, layout: 'layouts/layout2' });
+  res.render('matching_Manage/matchingConfirm', { title: '매칭요청관리', matchingName: '볼링 경기도 정기전', session: 'dd', layout: 'layouts/layout2' });
 
 });
 //==================매칭 수정
 router.get('/mID/modify', function (req, res, next) {
-  res.render('matching_Manage/matchingModify', { title: '매칭요청관리', matchingName: '볼링 경기도 정기전', session: req.mysession, layout: 'layouts/layout2' });
+  res.render('matching_Manage/matchingModify', { title: '매칭요청관리', matchingName: '볼링 경기도 정기전', session: 'dd', layout: 'layouts/layout2' });
 
 });
 //=========================
