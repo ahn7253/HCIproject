@@ -28,9 +28,50 @@
 </div>
 <div class="one column row" style="margin: 3em">
     <div class="column" id="a0_list">
-        
+
     </div>
 </div>
+
+<!-- 숨김 컴포넌트-->
+<div class="item" id="a1_item" style="display:none;">
+    <i class="users icon"></i>
+    <div class="content">
+        <a class="header" href="" id="a1_mname">수도권 영어 회화 모임</a>
+        <div class="description" id="a1_des">주최:아주대 AJESS</div>
+    </div>
+</div>
+
+<div class="item" id="a2_item" style="display:none;">
+    <i class="users icon"></i>
+    <div class="content">
+        <a class="header" href="" id="a2_mname">수도권 영어 회화 모임</a>
+        <div class="description" id="a2_des">주최:아주대 AJESS</div>
+    </div>
+</div>
+
+<div class="ui segment" style="text-align: center" id="a0_item" style="display:none;">
+    <i style="float:left;margin-top:10px" class="huge hourglass outline icon"></i>
+    <div class="content">
+        <a class="header" href="" style="font-size: 18px" id="a0_mname">수도권 영어 회화 모임 </a>
+        <br>
+        <br>
+        <span style="margin-top: 10px" id="a0_des">주최:아주대 AJESS</span>
+        <div align="right" style=" display: block ;margin-top:5px">
+            <button class="ui red button" onclick="cancel()">
+                <i class="icon times circle outline"></i>
+                취소하기
+            </button>
+            <button class="ui teal button" onclick="messageWrite()">
+                <i class="icon comment alternate outline"></i>
+                메세지 보내기
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="ui basic modal" id="cancel" style="text-align:center; width: 60%; margin:20%; height: 50%; bottom: 500px">
     <div class="ui icon header">
         <i class="archive icon"></i>
@@ -53,50 +94,9 @@
 
 
 </div>
-<!-- 숨김 컴포넌트-->
-<div class="item" id="a1_item" style="display:none;">
-    <i class="users icon"></i>
-    <div class="content">
-        <a class="header" href="" id="a1_mname">수도권 영어 회화 모임</a>
-        <div class="description" id="a1_des">주최:아주대 AJESS</div>
-    </div>
-</div>
-
-<div class="item" id="a2_item" style="display:none;">
-    <i class="users icon"></i>
-    <div class="content">
-        <a class="header" href="" id="a2_mname">수도권 영어 회화 모임</a>
-        <div class="description" id="a2_des">주최:아주대 AJESS</div>
-    </div>
-</div>
-
-<div class="ui segment" style="text-align: center" id="a0_item" style="display:none;">
-        <i style="float:left;margin-top:10px" class="huge hourglass outline icon"></i>
-        <div class="content">
-            <a class="header" href="" style="font-size: 18px" id="a0_mname">수도권 영어 회화 모임 </a>
-            <br>
-            <br>
-            <span style="margin-top: 10px" id="a0_des">주최:아주대 AJESS</span>
-            <div align="right" style=" display: block ;margin-top:5px">
-                <button class="ui red button" onclick="cancel()">
-                    <i class="icon times circle outline"></i>
-                    취소하기
-                </button>
-                <button class="ui teal button" onclick="messageWrite()">
-                    <i class="icon comment alternate outline"></i>
-                    메세지 보내기
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
 
 <script>
-    var results = <%- JSON.stringify(results) %>;
+    var results = <% - JSON.stringify(results) %>;
     console.dir(results);
     for (var i = 0; i < results.length; i++) {
         if (results[i].author == 1) { // author 1
