@@ -1,13 +1,13 @@
 <div id="body" style="margin-left:2em; margin-right:2em">
 <div class="ui segment" style="text-align:center">
     <h3><%=matchingName %> 요청 목록</h3>
-    <p>남은 자리: 2</p>
+    <p id="front_remainder">남은 자리: 2</p>
 </div>
 <div class="two column row">
-    <div class="column">
+    <div class="column" id="front_remove">
         <div class="ui segment">
             <h3> 경희대</h3>
-            <p># 동아리명: <a heft="">경희볼타귀</a></p>
+            <p># 동아리명: <a heft="">경희대볼링동아리</a></p>
             <p># 회장 연락처 : 010-6512-6544 / <a href="">wnsgur727@kyunghee.ac.kr</a></p>
             <p># 예상 참여 인원 : 35 명</p>
             <p># 학교 주소 : 경기도 용인시 기흥구 덕영대로 1732</p>
@@ -22,7 +22,7 @@
             <div class="ui buttons">
                 <button class="ui button">거절</button>
                     <div class="or"></div>
-                <button class="ui positive button">수락</button>
+                <button class="ui positive button" onclick="front()">수락</button>
             </div>
             </div>
         </div>
@@ -54,3 +54,10 @@
     </div>
 </div>   
 </div>   
+<script>
+
+    function front(){
+        $('#front_remainder').html("남은 자리: 1")
+        $('#front_remove').attr("style","display:none;")
+    }
+</script>
