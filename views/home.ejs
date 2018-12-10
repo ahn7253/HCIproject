@@ -29,41 +29,45 @@
     <style type="text/css">
         body {
             background-color: #1b1c1d;
-           
+
         }
-        #mainBoard{
-        width:90%;
-        position: relative;
-        margin:auto;
-        padding-bottom: 10%;
-            
+
+        #mainBoard {
+            width: 90%;
+            position: relative;
+            margin: auto;
+            padding-bottom: 10%;
+
         }
+
         .container {
-        position: relative;
-        font-family: Arial;
+            position: relative;
+            font-family: Arial;
         }
 
         .text-block {
-        position: fixed;
-        
-        bottom: 20px;
-        right: 20px;
-        background-color: black;
-        color: white;
-        padding-left: 20px;
-        padding-right: 20px;
+            position: fixed;
+
+            bottom: 20px;
+            right: 20px;
+            background-color: black;
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
         }
+
         .mainsearch {
-        position: relative;
-        color: white;
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-left:15%;
-        margin-top: -28%;
-        padding-bottom: 15%;
-        
-        width: 70%;
+            position: relative;
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-left: 15%;
+            margin-top: -28%;
+            padding-bottom: 15%;
+
+            width: 70%;
         }
+
         .ui.menu .item img.logo {
             margin-right: 1.5em;
         }
@@ -92,18 +96,18 @@
                 </div>
                 <div class="right menu">
                     <% if(session==="none"){ %>
-                        <a class="item">
-                            <i class="large sign-in icon" onclick="document.getElementById('id01').style.display='block'"></i>
-                        </a>
-                        <% } else { %>
-                            <a class="item">
-                                <i class="large power off icon"></i>
-                            </a>
-                            <% } %>
+                    <a class="item">
+                        <i class="large sign-in icon" onclick="document.getElementById('id01').style.display='block'"></i>
+                    </a>
+                    <% } else { %>
+                    <a class="item">
+                        <i class="large power off icon"></i>
+                    </a>
+                    <% } %>
 
-                                <a class="item">
-                                    <i class="large bars icon"></i>
-                                </a>
+                    <a class="item">
+                        <i class="large bars icon"></i>
+                    </a>
                 </div>
             </div>
             <div class="ui container">
@@ -113,31 +117,31 @@
                 <a href="/board" class="olive item" id='board'>게시판</a>
                 <a href="/maching" class="green item" id='maching'>매칭하기</a>
                 <% if (title) { %>
-                    <script>
-                        //menu id 값 받음
-                        var selectedMenu = document.getElementById("mainTitle").textContent;
-                        var menuActived = document.getElementById(selectedMenu);
-                        menuActived.className = "active " + menuActived.className;
-                    </script>
-                    <% } %>
+                <script>
+                    //menu id 값 받음
+                    var selectedMenu = document.getElementById("mainTitle").textContent;
+                    var menuActived = document.getElementById(selectedMenu);
+                    menuActived.className = "active " + menuActived.className;
+                </script>
+                <% } %>
             </div>
         </div>
         `
     </header>
-    
+
 
     <div class="containesr">
-        <img src='/img/BG.png' id="backImg"style="width: 100%; ">
-            <section class="mainsearch">
-                <div class="ui fluid icon input">
-                    <input type="text" name="search" placeholder="Search.." id="search_input">
-                    <button class="ui icon button" type="button" onclick="search()"> 
+        <img src='/img/BG.png' id="backImg" style="width: 100%; ">
+        <section class="mainsearch">
+            <div class="ui fluid icon input">
+                <input type="text" name="search" placeholder="Search.." id="search_input">
+                <button class="ui icon button" type="button" onclick="search()">
                     <i class="search icon"></i>
-                    </button>
-                </div>
-            </section>
+                </button>
+            </div>
+        </section>
         </img>
-        
+
         <section id="mainBoard">
             <div class="ui segment" style="width: 90%; margin: auto; margin-top: -10%; opacity: 0.8;">
                 <h2 class="ui header">
@@ -194,10 +198,13 @@
     <!--모달 시작-->
     <div id="id01" class="modal">
         <form class="modal-content animate" action="/user/loginaction" method="POST">
+
+
             <!-- <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div> -->
             <div class="ui form" style="padding:1%">
+
                 <label for="id">
                     <b>ID</b>
                 </label>
@@ -214,7 +221,8 @@
                 <br>
             </div>
             <div class="container" style="background-color: lightgray;padding: 2%">
-                <button class="ui small red button" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button class="ui small red button" type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Cancel</button>
                 <span class="psw">Forgot
                     <a href="#">password?</a>
                 </span>
@@ -225,17 +233,17 @@
     <!-- </section> -->
 </body>
 <main class="text_center">
-    
+
     <section>
         <div style="margin-bottom:5rem; margin-top:2rem; text-align:center">
-            
+
         </div>
-        
+
     </section>
 </main>
 
 <body>
-    
+
     </div>
     </div>
 </body>
@@ -244,22 +252,23 @@
 </footer> -->
 
 <script>
-    
-    function search(){
+
+    function search() {
         var kw = $('#search_input').val();
-        window.location.href = "/search?kw="+kw;
+        window.location.href = "/search?kw=" + kw;
     }
 
-    $( window ).resize(function() {
-        if(window.innerHeight/window.innerWidth>1.2)
-        document.getElementById("backImg").style.paddingTop="5%"
+    $(window).resize(function () {
+        if (window.innerHeight / window.innerWidth > 1.2)
+            document.getElementById("backImg").style.paddingTop = "5%"
 
         else
-        document.getElementById("backImg").style.paddingTop="0%"
+            document.getElementById("backImg").style.paddingTop = "0%"
 
-});
+    });
 
 
 
 </script>
+
 </html>

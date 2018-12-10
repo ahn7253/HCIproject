@@ -25,7 +25,46 @@ router.get('/history', function (req, res, next) {
 
 //===================나의 매칭 리스트
 router.get('/myMatchingList', function (req, res, next) {
-  res.render('matching_Manage/myMatchingList', { title: 'mymaching', session: req.mysession, layout: 'layouts/layout2' });
+
+  if (req.session.user) {
+    var Matching = DB.getTable('Matching');
+    var MatchingList = DB.getTable('MatchingList');
+    var Club_User = DB.getTable('Club_User');
+    
+    Club_User.select({uid:req.session.user.uid},function(err,results){
+      if(err)
+        throw err;
+      console.log("cid");
+      console.dir(results);
+
+      // cid인 
+      var t1 = "SELECT m.mname, ml.author,m.mid FROM matching_list AS ml, matching AS m WHERE m.mid = ml.mid";
+      for(var i=0; i<results.length;i++)
+        t1 = t1 + " AND ml.cid="+results[i].cid;
+      
+      var t2 = "SELECT c.cname, c.school_name, mll.mid FROM club AS c, matching_list AS mll WHERE c.cid=mll.cid AND mll.author=2"
+
+      var query = "("+t1+ ") t1 INNER JOIN ("+t2 + ") t2 ON t1.mid=t2.mid";
+
+      var query1 = "SELECT * FROM ("+t1+") AS t1, ("+t2+") AS t2 WHERE t1.mid=t2.mid";
+      
+      MatchingList.special(query1,function(err,results){
+        if(err)
+          throw err;
+       
+        res.render('matching_Manage/myMatchingList', { title: 'mymaching', session: req.mysession, layout: 'layouts/layout2',results:results });
+
+      });
+
+    });
+    
+
+
+  }else{
+    res.send('invalid');
+  }
+
+
 
 });
 
@@ -59,7 +98,7 @@ router.post('/registeraction', function (req, res) {
     author: 1
 
   }
-  if (req.session.user&&req.session.user.author>0) {
+  if (req.session.user && req.session.user.author > 0) {
 
     Club_User.select({ uid: req.session.user.uid, author: 2 }, function (err, results) { // get cid
       if (err)
@@ -74,8 +113,8 @@ router.post('/registeraction', function (req, res) {
         Matching.insert(condition, function (err, results) {
           if (err)
             throw err;
-            
-            //insert MatchingList
+
+          //insert MatchingList
           MatchingList.insert(condition1, function (err, results) {
             if (err)
               throw err;
@@ -94,7 +133,7 @@ router.post('/registeraction', function (req, res) {
 router.get('/search', function (req, res) {
   var keyword = req.query.kw;
   var query = "SELECT m.mname,m.1st_area,m.2nd_area,m.category,m.number,m.mid, ml.cid, c.cname FROM matching AS m, matching_list AS ml, club AS c WHERE (m.mname LIKE '%" + keyword + "%' OR m.content LIKE '%" + keyword + "%' OR m.category LIKE '%" + keyword + "%' OR m.1st_area LIKE '%" + keyword + "%' OR m.2nd_area LIKE '%" + keyword + "%') AND m.mid = ml.mid AND ml.author=2 AND ml.cid = c.cid";
-  
+
   var Matching = DB.getTable('Matching');
 
   Matching.special(query, function (err, results) {
@@ -102,20 +141,20 @@ router.get('/search', function (req, res) {
       throw err;
     res.send(results);
     console.dir(results);
-   
+
   })
 });
 
 
-router.get('/detail',function(req,res){
+router.get('/detail', function (req, res) {
   var mid = Number(req.query.mid);
   var Matching = DB.getTable('Matching');
   var Club = DB.getTable('Club');
   var detail = {
 
   }
-  Matching.select({mid:mid},function(err,results){
-    if(err)
+  Matching.select({ mid: mid }, function (err, results) {
+    if (err)
       throw err;
     detail.mname = results[0].mname;
     detail.mid = results[0].mid;
@@ -125,43 +164,43 @@ router.get('/detail',function(req,res){
     detail.s_area = results[0]["2nd_area"];
     detail.number = results[0].number;
 
-    var query = "SELECT c.cname,c.url,c.school_name FROM club AS c, matching_list AS ml WHERE ml.cid = c.cid AND ml.mid="+mid+" AND author <> 0";
+    var query = "SELECT c.cname,c.url,c.school_name FROM club AS c, matching_list AS ml WHERE ml.cid = c.cid AND ml.mid=" + mid + " AND author <> 0";
 
-    Club.special(query,function(err,results){
-      if(err)
+    Club.special(query, function (err, results) {
+      if (err)
         throw err;
       detail.club_list = results;
 
       res.send(detail);
     });
 
-  }); 
+  });
 
 
 });
 
 
 
-router.get('/requestMaching',function(req,res){
-  if(req.session.user){
+router.get('/requestMaching', function (req, res) {
+  if (req.session.user) {
     var mid = Number(req.query.mid);
     var Club_User = DB.getTable('Club_User');
-    
-    Club_User.select({uid:req.session.user.uid,author:2},function(err,results){
-      if(err)
+
+    Club_User.select({ uid: req.session.user.uid, author: 2 }, function (err, results) {
+      if (err)
         throw err;
-      if(results.length==0)
+      if (results.length == 0)
         res.send("동아리 회장이 아닙니다.")
-      else{
+      else {
         var MatchingList = DB.getTable('MatchingList');
-        
+
         var values = {
-          cid : results[0].cid,
-          mid : mid,
-          author:0
+          cid: results[0].cid,
+          mid: mid,
+          author: 0
         }
-        MatchingList.insert(values,function(err,results){
-          if(err)
+        MatchingList.insert(values, function (err, results) {
+          if (err)
             throw err;
           res.redirect('/maching');
         });
@@ -170,7 +209,7 @@ router.get('/requestMaching',function(req,res){
   }
   else
     res.send("error");
-  
+
 
 
 });
