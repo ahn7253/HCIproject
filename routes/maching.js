@@ -93,14 +93,15 @@ router.post('/registeraction', function (req, res) {
 
 router.get('/search', function (req, res) {
   var keyword = req.query.kw;
-  var query = "SELECT m.mname,m.1st_area,m.2nd_area,m.category,m.number,m.mid, ml.cid, c.cname FROM matching AS m, matching_list AS ml, club AS c WHERE (m.mname LIKE '%" + keyword + "%' OR m.content LIKE '%" + keyword + "%' OR m.category LIKE '%" + keyword + "%' OR m.1st_area LIKE '%" + keyword + "%' OR m.2nd_area LIKE '%" + keyword + "%') AND m.mid = ml.mid AND ml.author=1 AND ml.cid = c.cid";
-  console.log(query);
+  var query = "SELECT m.mname,m.1st_area,m.2nd_area,m.category,m.number,m.mid, ml.cid, c.cname FROM matching AS m, matching_list AS ml, club AS c WHERE (m.mname LIKE '%" + keyword + "%' OR m.content LIKE '%" + keyword + "%' OR m.category LIKE '%" + keyword + "%' OR m.1st_area LIKE '%" + keyword + "%' OR m.2nd_area LIKE '%" + keyword + "%') AND m.mid = ml.mid AND ml.author=2 AND ml.cid = c.cid";
+  
   var Matching = DB.getTable('Matching');
 
   Matching.special(query, function (err, results) {
     if (err)
       throw err;
     res.send(results);
+    console.dir(results);
    
   })
 });
@@ -124,7 +125,7 @@ router.get('/detail',function(req,res){
     detail.s_area = results[0]["2nd_area"];
     detail.number = results[0].number;
 
-    var query = "SELECT c.cname,c.url,c.school_name FROM club AS c, matching_list AS ml WHERE ml.cid = c.cid AND ml.mid="+mid;
+    var query = "SELECT c.cname,c.url,c.school_name FROM club AS c, matching_list AS ml WHERE ml.cid = c.cid AND ml.mid="+mid+" AND author <> 0";
 
     Club.special(query,function(err,results){
       if(err)
