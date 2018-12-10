@@ -14,7 +14,7 @@
         <div class="item">
             <img src="/img/clubmark.png">
         </div>
-        <a class="item">아주대 중앙 볼링</a>
+        <a class="item"><%= clubinfo.cname %></a>
         <div class="item">
             <button class="ui basic gray icon button">
                 <i class="angle double right icon"></i>
@@ -46,12 +46,9 @@
                                 <button class="ui icon button" style="float:right">
                                     <i class="plus icon"></i>
                                 </button>
-                                <h2 class="ui right floated header">공지사항</h2>
+                                <h2 class="ui right floated header">동아리소개</h2>
                                 <div class="ui clearing divider"></div>
-                                <p>hello HCI</p>
-                                <p>It's demo board text</p>
-                                <p>Lets go!</p>
-                                <p>123334</p>
+                                <%= clubinfo.description %>
 
                             </div>
                         </div>

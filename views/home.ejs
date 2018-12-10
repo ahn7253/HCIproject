@@ -130,8 +130,8 @@
         <img src='/img/BG.png' id="backImg"style="width: 100%; ">
             <section class="mainsearch">
                 <div class="ui fluid icon input">
-                    <input type="text" name="search" placeholder="Search..">
-                    <button class="ui icon button"type="submit">
+                    <input type="text" name="search" placeholder="Search.." id="search_input">
+                    <button class="ui icon button" type="button" onclick="search()"> 
                     <i class="search icon"></i>
                     </button>
                 </div>
@@ -244,6 +244,11 @@
 </footer> -->
 
 <script>
+    
+    function search(){
+        var kw = $('#search_input').val();
+        window.location.href = "/search?kw="+kw;
+    }
 
     $( window ).resize(function() {
         if(window.innerHeight/window.innerWidth>1.2)
