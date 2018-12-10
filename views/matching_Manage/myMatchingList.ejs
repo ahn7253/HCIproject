@@ -57,7 +57,7 @@
         <br>
         <span style="margin-top: 10px" id="a0_des">주최:아주대 AJESS</span>
         <div align="right" style=" display: block ;margin-top:5px">
-            <button class="ui red button" onclick="cancel()" id="_debug">
+            <button class="ui red button" onclick="cancel(this.parentElement.parentElement.parentElement.id)" id="_debug">
                 <i class="icon times circle outline"></i>
                 취소하기
             </button>
@@ -89,6 +89,7 @@
                 <i class="checkmark icon"></i>
                 예
             </div>
+            <div id="rm_target" style="display:none;"></div>
         </div>
         <% include ../util/modal/messagemodal_write %>
 
@@ -98,7 +99,7 @@
 
 <script>
     var results = <%- JSON.stringify(results) %>;
-    console.dir(results);
+        console.dir(results);
     for (var i = 0; i < results.length; i++) {
         if (results[i].author == 1) { // author 1
             var me = $('#a1_item').clone(true, true).attr('id', results[i].mid).after('#a1_item')
@@ -138,7 +139,28 @@
 
 <script>
     function cancelOn() {
-        document.getElementById("wait1").style.display = "none";
+        var mid = $('#rm_target').html()
+        document.getElementById(mid).style.display = "none";
+
+        /*
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var results = JSON.parse(this.responseText);
+                    var tbody = document.getElementById('m_list');
+                    while (tbody.firstChild)
+                        tbody.removeChild(tbody.firstChild);
+                    console.dir(results);
+                    setDetail(results);
+
+                }
+
+
+            }
+        }
+        xhttp.open("GET", "/maching/detail?mid=" + mid, true);
+        xhttp.send();*/
     }
     function messageWrite() {
         $('#messageWrite')
@@ -146,12 +168,13 @@
             ;
     };
 
-    function cancel() {
+    function cancel(id) {
+        $('#rm_target').html(id);
         $('#cancel')
             .modal('show')
             ;
     };
-    window.onload = function(){
-        document.getElementById("a0_item").setAttribute("style","display:none;")
+    window.onload = function () {
+        document.getElementById("a0_item").setAttribute("style", "display:none;")
     }
 </script>
