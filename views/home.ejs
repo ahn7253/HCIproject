@@ -194,29 +194,27 @@
     <!--모달 시작-->
     <div id="id01" class="modal">
         <form class="modal-content animate" action="/user/loginaction" method="POST">
-            <div class="imgcontainer">
+            <!-- <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-            <div class="container">
+            </div> -->
+            <div class="ui form" style="padding:1%">
                 <label for="id">
                     <b>ID</b>
                 </label>
-                <input type="text" placeholder="Enter ID" name="id" required>
+                <input type="text" placeholder="Enter ID" name="id" required class="ui text" style="width: 30%">
                 <label for="pw">
                     <b>Password</b>
                 </label>
-                <input type="password" placeholder="Enter Password" name="pw" required>
+                <input type="password" placeholder="Enter Password" name="pw" required style="width: 30%">
                 <input type="text" name="url" style="display:none;" value="/">
-                <button type="submit">Login</button>
+                <button type="submit" class="ui small teal button">Login</button>
                 <a href="./user/registration">
-                    <button type="button">회원가입</button>
+                    <button class="ui small teal button" type="button">회원가입</button>
                 </a>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
+                <br>
             </div>
-            <div class="container" style="background-color: lightgray">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <div class="container" style="background-color: lightgray;padding: 2%">
+                <button class="ui small red button" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
                 <span class="psw">Forgot
                     <a href="#">password?</a>
                 </span>
