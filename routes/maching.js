@@ -95,7 +95,7 @@ router.post('/registeraction', function (req, res) {
   }
 
   var condition1 = {
-    author: 1
+    author: 2
 
   }
   if (req.session.user && req.session.user.author > 0) {
