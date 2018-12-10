@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('home',{title: 'home', session:req.mysession});
 });
 
+
 router.get('/search',function(req,res){
   var kw = req.query.kw;
 
@@ -17,6 +18,11 @@ router.get('/search',function(req,res){
       throw err;
      /// 여기에 작업하면됨
   });
+});
+
+
+router.get('/searchpage', function (req, res, next) {
+  res.render('searchpage/searchpage', { title: 'searchpage', session: req.mysession, layout: 'layouts/layout2' });
 
 });
 
