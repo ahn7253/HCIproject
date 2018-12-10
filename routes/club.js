@@ -92,7 +92,19 @@ router.get('/checkdupurl/:url', function (req, res) {
 });
 
 router.get('/page/:url', function (req, res) {
-  res.send(req.params.url);
+  var url = req.params.url;
+  
+  var Club = DB.getTable('Club');
+  
+  Club.select({url:url},function(err,results){
+    if(err)
+      throw err;
+    
+    console.dir(results[0]);
+    res.render('club/page/main', { title: 'main', session: req.mysession, layout: 'layouts/layout2',clubinfo:results[0] });
+  })
+
+  
 });
 
 

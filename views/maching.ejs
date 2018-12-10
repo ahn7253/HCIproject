@@ -200,7 +200,7 @@
 
                         me.appendTo('#m_list');
 
-                        me.find('#m_itemurl').html(detail.club_list[i].cname).attr("src", detail.club_list[i].url);
+                        me.find('#m_itemurl').html(detail.club_list[i].cname).attr("href", "/club/page/"+detail.club_list[i].url);
                         me.find('#m_itemdes').html(detail.club_list[i].school_name);
 
                         me.show();
