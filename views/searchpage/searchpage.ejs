@@ -12,15 +12,36 @@
     </div>
     <div>
         <div class="ui segment">
-            <div class="ui relaxed divided list">
-                <div class="item">
-                    <i class="users icon"></i>
-                    <div class="content">
-                        <a class="header" href="">수도권 영어 회화 모임</a>
-                        <div class="description">주최:아주대 AJESS</div>
-                    </div>
-                </div>
+            <div class="ui relaxed divided list" id="s_list">
+
             </div>
         </div>
     </div>
+
+    <div class="item" id="s_item" style="display:none;">
+        <i class="users icon"></i>
+        <div class="content">
+            <a class="header" id="s_cname">수도권 영어 회화 모임</a>
+            <div class="description" id="s_des">주최:아주대 AJESS</div>
+        </div>
+    </div>
+    <script>
+        var results = <%- JSON.stringify(results) %>;
+
+
+        for (var i = 0; i < results.length; i++) {
+
+            var me = $('#s_item').clone(true, true).attr('id', results[i].cname).after('#s_item')
+
+            me.appendTo('#s_list');
+
+            me.find('#s_cname').html(results[i].cname).attr("href", "/club/page/" + results[i].url);
+            me.find('#s_des').html(results[i].school_name+" / "+results[i].description);
+
+            me.show();
+
+        }
+
+
+    </script>
 </body>
