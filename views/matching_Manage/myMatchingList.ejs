@@ -1,112 +1,153 @@
-
-<div class="ui stackable grid" style="margin:3em; margin-top: 4em"> 
+<div class="ui stackable grid" style="margin:3em; margin-top: 4em">
     <div style="margin: auto">
-    <h2 align="center">매칭 리스트</h2>
-    </div>    
-        <div class="two column row">
+        <h2 align="center">매칭 리스트</h2>
+    </div>
+    <div class="two column row">
         <div class="column">
             <div class="ui segment">
                 <h3>참여자 매칭 리스트</h3>
-                <div class="ui relaxed divided list">
-                    <div class="item">
-                        <i class="users icon"></i>
-                        <div class="content">
-                                <a class="header" href="">수도권 영어 회화 모임</a>
-                                <div class="description">주최:아주대 AJESS</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="users icon"></i>
-                        <div class="content">
-                            <a class="header" href="">힙합 합동 공연 모집</a>
-                            <div class="description">주최: 경희대 Seoul</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>      
-            <div class="column">
-                <div class="ui segment">
-                    <h3>관리자 매칭 리스트</h3>
-                    <div class="ui relaxed divided list">
-                        <div class="item">
-                            <i class="users icon"></i>
-                            <div class="content">
-                                    <a class="header" href="/maching/manage">경기 지역 대학 볼링연합전</a>
-                                    <div class="description">주최:아주대 Apin</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="ui relaxed divided list" id="a1_list">
+
+                    <!--여기에 추가됩니다. a1-->
                 </div>
             </div>
         </div>
-        <div class="ui divider"></div>
+        <div class="column">
+            <div class="ui segment">
+                <h3>관리자 매칭 리스트</h3>
+                <div class="ui relaxed divided list" id="a2_list">
+                    <!--여기에 추가됩니다 a2-->
+                </div>
+            </div>
         </div>
-        <div style="margin-bottom: 1em; text-align:center">
-            <h2>대기중인 매칭 리스트</h2>
-        </div>  
-        <div class="one column row" style="margin: 3em">
-                <div class="column">
-                    <div class="ui segment" style="text-align: center" id="wait1">
-                        <i style="float:left;margin-top:10px" class="huge hourglass outline icon"></i>
-                        <div class="content">
-                                <a class="header" href="" style="font-size: 18px">수도권 영어 회화 모임  </a>
-                                <br>
-                                <br>
-                                    <span style="margin-top: 10px">주최:아주대 AJESS</span>
-                                <div align="right" style=" display: block ;margin-top:5px">                                
-                                    <button class="ui red button" onclick="cancel()">
-                                        <i class="icon times circle outline"></i>
-                                        취소하기
-                                    </button>
-                                    <button class="ui teal button" onclick="messageWrite()">
-                                        <i class="icon comment alternate outline"></i>
-                                        메세지 보내기
-                                    </button>
-                                </div>
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <div class="ui divider"></div>
+</div>
+<div style="margin-bottom: 1em; text-align:center">
+    <h2>대기중인 매칭 리스트</h2>
+</div>
+<div class="one column row" style="margin: 3em">
+    <div class="column" id="a0_list">
+        
+    </div>
+</div>
+<div class="ui basic modal" id="cancel" style="text-align:center; width: 60%; margin:20%; height: 50%; bottom: 500px">
+    <div class="ui icon header">
+        <i class="archive icon"></i>
+        정말로 매칭을 취소하시겠습니까?
+    </div>
+    <div class="content">
+        <p>수락 대기중인 매칭을 취소합니다. 재신청에 불이익은 없으나, 선착순이 뒤로 밀려나게됩니다. 괜찮습니까?</p>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            아니오
         </div>
-        <div class="ui basic modal" id="cancel" style="text-align:center; width: 60%; margin:20%; height: 50%; bottom: 500px">
-                <div class="ui icon header">
-                    <i class="archive icon"></i>
-                    정말로 매칭을 취소하시겠습니까?
-                </div>
-                <div class="content">
-                    <p>수락 대기중인 매칭을 취소합니다. 재신청에 불이익은 없으나, 선착순이 뒤로 밀려나게됩니다. 괜찮습니까?</p>
-                </div>
-                <div class="actions">
-                    <div class="ui red basic cancel inverted button">
-                    <i class="remove icon"></i>
-                    아니오
-                    </div>
-                    <div class="ui green ok inverted button" onclick="cancelOn()">
-                    <i class="checkmark icon"></i>
-                    예
-                    </div>
-                </div>
-        <% include ../util/modal/messagemodal_write %>
-        
-        
+        <div class="ui green ok inverted button" onclick="cancelOn()">
+            <i class="checkmark icon"></i>
+            예
         </div>
-        
-        
-        <script>
-            function cancelOn(){
-                document.getElementById("wait1").style.display="none";
-            }
-           function messageWrite() {
-                $('#messageWrite')
-                    .modal('show')
-                    ;
-            };
+    </div>
+    <% include ../util/modal/messagemodal_write %>
 
-            function cancel() {
-                $('#cancel')
-                    .modal('show')
-                    ;
-            };
-        </script>
 
-        
+</div>
+<!-- 숨김 컴포넌트-->
+<div class="item" id="a1_item" style="display:none;">
+    <i class="users icon"></i>
+    <div class="content">
+        <a class="header" href="" id="a1_mname">수도권 영어 회화 모임</a>
+        <div class="description" id="a1_des">주최:아주대 AJESS</div>
+    </div>
+</div>
+
+<div class="item" id="a2_item" style="display:none;">
+    <i class="users icon"></i>
+    <div class="content">
+        <a class="header" href="" id="a2_mname">수도권 영어 회화 모임</a>
+        <div class="description" id="a2_des">주최:아주대 AJESS</div>
+    </div>
+</div>
+
+<div class="ui segment" style="text-align: center" id="a0_item" style="display:none;">
+        <i style="float:left;margin-top:10px" class="huge hourglass outline icon"></i>
+        <div class="content">
+            <a class="header" href="" style="font-size: 18px" id="a0_mname">수도권 영어 회화 모임 </a>
+            <br>
+            <br>
+            <span style="margin-top: 10px" id="a0_des">주최:아주대 AJESS</span>
+            <div align="right" style=" display: block ;margin-top:5px">
+                <button class="ui red button" onclick="cancel()">
+                    <i class="icon times circle outline"></i>
+                    취소하기
+                </button>
+                <button class="ui teal button" onclick="messageWrite()">
+                    <i class="icon comment alternate outline"></i>
+                    메세지 보내기
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+<script>
+    var results = <%- JSON.stringify(results) %>;
+    console.dir(results);
+    for (var i = 0; i < results.length; i++) {
+        if (results[i].author == 1) { // author 1
+            var me = $('#a1_item').clone(true, true).attr('id', results[i].mid).after('#a1_item')
+
+            me.appendTo('#a1_list');
+
+            me.find('#a1_mname').html(results[i].mname).attr("href", ""); // plz set url
+            me.find('#a1_des').html("주최:" + results[i].school_name + " " + results[i].cname);
+
+            me.show();
+        }
+        else if (results[i].author == 2) { // author 1
+            var me = $('#a2_item').clone(true, true).attr('id', results[i].mid).after('#a2_item')
+
+            me.appendTo('#a2_list');
+
+            me.find('#a2_mname').html(results[i].mname).attr("href", ""); // plz set url
+            me.find('#a2_des').html("주최:" + results[i].school_name + " " + results[i].cname);
+
+            me.show();
+        }
+        else if (results[i].author == 0) { // author 1
+            var me = $('#a0_item').clone(true, true).attr('id', results[i].mid).after('#a0_item')
+
+            me.appendTo('#a0_list');
+
+            me.find('#a0_mname').html(results[i].mname).attr("href", ""); // plz set url
+            me.find('#a0_des').html("주최:" + results[i].school_name + " " + results[i].cname);
+
+            me.show();
+        }
+    }
+
+
+
+</script>
+
+<script>
+    function cancelOn() {
+        document.getElementById("wait1").style.display = "none";
+    }
+    function messageWrite() {
+        $('#messageWrite')
+            .modal('show')
+            ;
+    };
+
+    function cancel() {
+        $('#cancel')
+            .modal('show')
+            ;
+    };
+</script>
