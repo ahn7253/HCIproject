@@ -113,7 +113,8 @@
 </div>
 
 <!--메칭 등록-->
-<button class="ui google plus button" style="display: block; margin:auto; margin-top:2%" onclick="$('#rm_modal').modal('show');" <i class="edit outline icon">
+<button class="ui google plus button" style="display: block; margin:auto; margin-top:2%" onclick="$('#rm_modal').modal('show');"
+    <i class="edit outline icon">
     </i>
     등록하기
 </button>
@@ -123,8 +124,14 @@
 
 
 <script>
-//search
+    //search
     function search() {
+        var tbody = document.getElementById('matching_list');
+        
+        //refresh screen.
+        while (tbody.firstChild)
+            tbody.removeChild(tbody.firstChild);
+
         var kw = $('#cc_searchinput').val();
         $('#cc_searchinput').val("");
         var xhttp = new XMLHttpRequest();
@@ -159,7 +166,7 @@
             ;
     };
 
-    
+
 
     function runScript(e) {
         //See notes about 'which' and 'key'
